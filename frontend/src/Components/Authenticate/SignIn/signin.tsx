@@ -1,15 +1,16 @@
 import InputLabel from "../../General/InputLabel";
-import Bank from "../../../assets/bank.svg"
+import WhiteBank from "../../../assets/whitebank.svg"
+import "./signin.css"
 
 export default function SignIn(){
     return <div className="signin">
 
         <div className="company">
-            <img src={Bank} alt="MyBank" width="75px"/>
+            <img src={WhiteBank} alt="MyBank" width="75px"/>
             <h1>MyBank</h1>
         </div>
 
-        <span className="title">SignIn</span>
+        <span className="title">Sign In</span>
 
         <div className="inputs">
             <InputLabel 
@@ -28,6 +29,6 @@ export default function SignIn(){
 
         </div>
 
-        <button>SignIn</button>
+        <button>Sign in</button>
     </div>
 }

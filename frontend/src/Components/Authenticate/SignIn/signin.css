@@ -1,1 +1,30 @@
-@import "../../style/variables.css"
+@import "../../../style/variables.css";
+@import "../sign.css";
+
+.signin{
+    border: 1px solid var(--white);
+    background-color: var(--green-600);
+}
+
+.signin h1{
+    color: var(--white)
+}
+
+.signin label{
+    color: var(--white)
+}
+
+.signin input{
+    border: 1px solid var(--white);
+    background-color: var(--green-600);
+}
+
+.signin ::placeholder{
+    color: var(--white);
+}
+
+.signin button{
+    border: 1px solid var(--white);
+    color: var(--white);
+    background-color: var(--green-600);
+}
