@@ -1,0 +1,7 @@
+@import "../../style/variables.css";
+
+.company{
+    display: flex;
+    column-gap: 25px;
+    align-items: center;
+}

@@ -1,0 +1,28 @@
+@import "../../../style/variables.css";
+@import "../sign.css";
+
+.signup{
+    border: 1px solid var(--green-500);
+}
+
+.signup h1{
+    color: var(--green-500)
+}
+
+.signup label{
+    color: var(--green-600)
+}
+
+.signup input{
+    border: 1px solid var(--gray-600);
+}
+
+.signup ::placeholder{
+    color: var(--gray-500);
+}
+
+.signup button{
+    border: 1px solid var(--green-600);
+    color: var(--green-600);
+    background-color: var(--white);
+}

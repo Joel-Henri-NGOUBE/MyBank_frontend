@@ -1,0 +1,11 @@
+@import "../style/variables.css";
+
+.operations, .management, .settings, .neworsetoperation, .statistics{
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    width: calc(100% - 110px);
+    min-height: calc(100% - 110px);
+    border: 1px solid var(--gray-600);
+    border-radius: 20px;
+}

@@ -1,0 +1,51 @@
+@import "../../style/variables.css";
+
+.signup, .signin{
+    display: flex;
+    width: 500px;
+    height: 600px;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    row-gap: 40px;
+    padding-top: 25px;
+}
+
+.title{
+    font-size: var(--h2-smaller-size);
+    font-weight: var(--h2-smaller-weight);
+    color: var(--green-700);
+}
+
+label{
+    font-size: 18px;
+    font-weight: var(--body1-weight);
+    /* color: var(--green-600); */
+}
+
+.inputlabel{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+input{
+    border-radius: 10px;
+    width: 250px;
+    padding: 3px 18px
+}
+
+h1{
+    font-size: var(--h1-size);
+    font-weight: var(--h1-regular);
+}
+
+button{
+    font-size: 18px;
+}
