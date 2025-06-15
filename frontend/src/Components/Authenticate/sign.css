@@ -11,6 +11,10 @@
     padding-top: 25px;
 }
 
+#root{
+    align-items: center;
+}
+
 .title{
     font-size: var(--h2-smaller-size);
     font-weight: var(--h2-smaller-weight);
