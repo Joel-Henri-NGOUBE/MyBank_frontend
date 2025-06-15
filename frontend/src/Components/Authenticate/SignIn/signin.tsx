@@ -1,14 +1,14 @@
 import InputLabel from "../../General/InputLabel";
 import WhiteBank from "../../../assets/whitebank.svg"
 import "./signin.css"
+import Company from "../../Company/company";
 
 export default function SignIn(){
     return <div className="signin">
 
-        <div className="company">
-            <img src={WhiteBank} alt="MyBank" width="75px"/>
-            <h1>MyBank</h1>
-        </div>
+        <Company 
+            svg={WhiteBank}
+            length="75px"/>
 
         <span className="title">Sign In</span>
 
