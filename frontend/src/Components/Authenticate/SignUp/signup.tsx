@@ -17,21 +17,18 @@ export default function SignUp(){
                 label="Mail"
                 placeholder="Mail adress"
                 type="text"
-                direction="horizontal"
                 />
     
                 <InputLabel 
                 label="Password"
                 placeholder="Your password"
                 type="text"
-                direction="horizontal"
                 />
     
                 <InputLabel 
                 label="Confirm password"
                 placeholder="Retype your password"
                 type="text"
-                direction="horizontal"
                 />
             </div>
     

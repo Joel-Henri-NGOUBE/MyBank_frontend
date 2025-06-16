@@ -1,2 +1,94 @@
 @import "../pages.css";
 
+.neworsetoperation .page{
+    width: 100%;
+    height: calc(100% - 110px);
+    display: flex;
+    row-gap: 40px;
+    margin-top: 15vmin; /*utiliser vmax pour les mobiles*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.neworsetoperation h3{
+    font-size: var(--h3-size);
+    font-weight: var(--h3-weight);
+}
+
+.neworsetoperation .inputs{
+    row-gap: 50px;
+}
+
+.neworsetoperation .buttons{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.neworsetoperation button{
+    border: 2px solid var(--orange-500);
+    color: var(--orange-500);
+    background-color: var(--white);
+    /* border-radius: 2px; */
+    font-size: var(--label1-size);
+    font-weight: var(--label1-weight);
+
+}
+
+.neworsetoperation label{
+    font-size: var(--body1-size);
+    font-weight: var(--body1-weight);
+    width: 170px;
+}
+
+.neworsetoperation .inputlabel, .neworsetoperation .inputselect{
+    display: flex;
+}
+
+.neworsetoperation ::placeholder{
+    color: var(--gray-500);
+}
+
+.neworsetoperation input, .neworsetoperation select{
+    border: 1px solid var(--black-500);
+    border-radius: 7px;
+    padding: 7px 20px;
+}
+
+.neworsetoperation input[type="date"], .neworsetoperation input[type="number"]{
+    padding: 7px 7px 7px 20px;
+}
+
+.neworsetoperation select{
+    width: 190px;
+}
+
+/* .neworsetoperation select{
+    padding: 7px 20px;
+} */
+
+.neworsetoperation input[type="text"]{
+    width: 290px;
+}
+
+.neworsetoperation input[type="date"], .neworsetoperation input[type="number"]{
+    width: 160px;
+}
+
+.neworsetoperation select{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: url("../../assets/downarrow.svg") no-repeat;
+    background-position: calc(100% - 10px);
+}
+
+.neworsetoperation input[type="date"]::-webkit-calendar-picker-indicator{
+    display: block;
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    background: url("../../assets/calendarsmall.svg") no-repeat;
+    background-position: center;
+
+}

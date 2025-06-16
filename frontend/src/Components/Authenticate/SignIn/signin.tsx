@@ -17,14 +17,12 @@ export default function SignIn(){
             label="Mail"
             placeholder="Mail adress"
             type="text"
-            direction="horizontal"
             />
 
             <InputLabel 
             label="Password"
             placeholder="Your password"
             type="text"
-            direction="horizontal"
             />
 
         </div>
