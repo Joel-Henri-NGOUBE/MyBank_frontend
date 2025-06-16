@@ -1,0 +1,21 @@
+@import "../managementcomponent.css";
+
+.management button{
+    border: 2px solid var(--red-500);
+    color: var(--red-500);
+    background-color: var(--white);
+    /* border-radius: 2px; */
+    font-size: var(--label1-size);
+    font-weight: var(--label1-weight);
+
+}
+
+div#tracking .body span{
+    color: var(--red-500);
+}
+
+div#tracking .body p{
+    font-size: var(--body1-size);
+    font-weight: var(--body-weight);
+    text-align: center;
+}

@@ -13,6 +13,11 @@ function App() {
             <Route path="/" element={<Authenticate />} />
             <Route path="/operations" element={<Operations />} />
             <Route path="/management" element={<Management />} />
+              {/* <Route path="/" element={<Management />} />
+              <Route path="/track" element={<Operations />} />
+              <Route path="/invest" element={<Operations />} />
+              <Route path="/save" element={<Operations />} /> */}
+            {/* </Route> */}
             <Route path="/settings" element={<Settings />} />
             <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
               <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />

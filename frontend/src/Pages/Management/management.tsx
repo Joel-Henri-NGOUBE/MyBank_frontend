@@ -1,12 +1,17 @@
+import { useState } from "react";
 import Header from "../../Components/Header/header";
 import "./management.css"
+import ManagementHeader from "../../Components/ManagementHeader/Managementheader";
+import Tracking from "../../Components/ManagementComponents/Tracking/tracking";
+import Investing from "../../Components/ManagementComponents/Investing/investing";
+import Saving from "../../Components/ManagementComponents/Saving/saving";
 
 export default function Management(){
+    const [pages, setPages] = useState<boolean[]>([false, false, false, true])
     return <div className="management">
         <Header />
 
-        <div className="page">
-            {/* <div> */}
+        {pages[0] && <div className="page">
                 <p id="introduction">What are you using <span>MyBank</span> for today ?</p>
                 <div className="actions">
                     <div className="tracking">
@@ -22,7 +27,22 @@ export default function Management(){
                         <p>List and retrieve all the incomes and expenses and put some money aside from your balance</p>
                     </div>
                 </div>
-            {/* </div> */}
-        </div>
+        </div>}
+
+        {pages[1] && 
+                    <Tracking
+                        pages={pages}
+                        setPages={setPages}
+                    />}
+        {pages[2] && 
+                    <Investing
+                        pages={pages}
+                        setPages={setPages}
+                    />}
+        {pages[3] && 
+                    <Saving
+                        pages={pages}
+                        setPages={setPages}
+                    />}
     </div>
 }

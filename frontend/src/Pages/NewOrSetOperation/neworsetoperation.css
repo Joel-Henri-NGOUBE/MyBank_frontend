@@ -50,18 +50,14 @@
     color: var(--gray-500);
 }
 
-.neworsetoperation input, .neworsetoperation select{
+.neworsetoperation input, select{
     border: 1px solid var(--black-500);
     border-radius: 7px;
     padding: 7px 20px;
 }
 
-.neworsetoperation input[type="date"], .neworsetoperation input[type="number"]{
-    padding: 7px 7px 7px 20px;
-}
-
-.neworsetoperation select{
-    width: 190px;
+input[type="date"], input[type="number"]{
+    padding: 7px 7px 7px 20px !important;
 }
 
 /* .neworsetoperation select{
@@ -76,19 +72,17 @@
     width: 160px;
 }
 
-.neworsetoperation select{
+select{
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     background: url("../../assets/downarrow.svg") no-repeat;
     background-position: calc(100% - 10px);
+    width: 190px;
 }
 
-.neworsetoperation input[type="date"]::-webkit-calendar-picker-indicator{
+input[type="date"]::-webkit-calendar-picker-indicator{
     display: block;
-    color: rgba(0, 0, 0, 0);
-    opacity: 1;
     background: url("../../assets/calendarsmall.svg") no-repeat;
     background-position: center;
-
 }

@@ -35,4 +35,11 @@ button, img{
 button{
     border-radius: 13px;
     padding: 10px 20px;
+    width: max-content;
+}
+
+::-webkit-scrollbar{
+  /* width: 5px; */
+  /* visibility: hidden; */
+  display: none;
 }

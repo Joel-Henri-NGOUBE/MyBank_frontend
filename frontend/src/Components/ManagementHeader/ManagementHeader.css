@@ -1,0 +1,45 @@
+.managementHeader{
+    display: flex;
+    width: 90%;
+    justify-content: center;
+}
+
+
+
+.managementHeader .right{
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    row-gap: 20px;
+    justify-content: center;
+}
+
+.managementHeader .right{
+    font-size: 16px;
+    font-weight: var(--label1-weight);
+    color: var(--gray-500);
+}
+
+.managementHeader .right .activepage{
+    font-size: var(--label1-size);
+    font-weight: var(--label1-weight);
+    color: var(--red-400);
+}
+
+.managementHeader .left{
+    width: calc(100% - 120px);
+    height: 120px;
+    background-color: var(--red-400);
+    color: var(--white);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--h4-size);
+    font-weight: 400;
+}
+
+.managementHeader .right{
+    cursor: pointer;
+}
