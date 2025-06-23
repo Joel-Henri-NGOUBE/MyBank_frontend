@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router";
 import InputLabel from "../../Components/General/InputLabel";
 import InputSelect from "../../Components/General/InputSelect";
 import Header from "../../Components/Header/header";
 import "./neworsetoperation.css"
 
 export default function NewOrSetOperation(){
+    
+    const navigate : Function = useNavigate()
+    
     return <div className="neworsetoperation">
         <Header />
 
@@ -41,8 +45,8 @@ export default function NewOrSetOperation(){
             </div>
 
             <div className="buttons">
-                <button>Get back to operations</button>
-                <button>Save operation</button>
+                <button onClick={() => navigate("/operations")}>Get back to operations</button>
+                <button onClick={() => navigate("/operations")}>Save operation</button>
             </div>
 
         </div>

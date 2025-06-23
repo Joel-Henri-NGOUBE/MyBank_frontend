@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router"
 import "./ManagementHeader.css"
 import type { ManagementPages } from "../../Interfaces/managementpages"
 

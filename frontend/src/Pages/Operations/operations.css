@@ -1,2 +1,366 @@
 @import "../pages.css";
 
+/* .slider{
+    display: flex;
+    overflow: hidden;
+    width: 100%; /*Trouver une meilleure valeur
+} */
+
+.operations .page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 50px;
+    padding: 50px 0;
+}
+
+.operations .balance{
+    font-size: var(--h1-size);
+    font-weight: var(--h1-semibold);
+    color: var(--positive-green);
+}
+
+.operations .sliding{
+    display: flex;
+    flex-direction: column;
+    row-gap: 60px;
+    width: 820px;
+}
+
+.operations .slider{
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.operations .operations-wrapper{
+    display: flex;
+    width: 100%;
+}
+
+.operations .operations-wrapper > *{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    flex-shrink: 0;
+    width: 100%;
+    height: 500px;
+}
+
+.operations .operations-wrapper .sub{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    margin-top: 20px;
+}
+
+.operations .operations-wrapper .sub{
+    cursor: pointer;
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+1) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+1){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--orange-500);
+    border-color: var(--orange-500);
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+2) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+2){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--blue-300);
+    border-color: var(--blue-300);
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+3) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+3){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--green-500);
+    border-color: var(--green-500);
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+4) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+4){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--gray-500);
+    border-color: var(--gray-500);
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+5) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+5){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--red-400);
+    border-color: var(--red-400);
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+6) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+6){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--blue-300);
+    border-color: var(--blue-300);
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+7) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+7){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--orange-600);
+    border-color: var(--orange-600);
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+8) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+8){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--red-500);
+    border-color: var(--red-500);
+}
+
+.operations .operations-wrapper div.operation:nth-of-type(10n+9) span.category, .operations .operations-wrapper div.categories span.category:nth-of-type(10n+9){
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border: 1px solid var(--black-500);
+    border-radius: 15px;
+    font-size: var(--label2-size);
+    color: var(--green-700);
+    border-color: var(--green-700);
+}
+
+.operations button{
+    border: 2px solid var(--orange-500);
+    color: var(--orange-500);
+    background-color: var(--white);
+    /* border-radius: 2px; */
+    font-size: var(--label1-size);
+    font-weight: var(--label1-weight);
+}
+
+.operations .buttons{
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.slideFromAllToIncomes{
+    animation-name: slideFromAllToIncomes;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.slideFromIncomesToAll{
+    animation-name: slideFromIncomesToAll;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideFromAllToIncomes {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideFromIncomesToAll {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.slideFromAllToExpenses{
+    animation-name: slideFromAllToExpenses;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.slideFromExpensesToAll{
+    animation-name: slideFromExpensesToAll;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideFromAllToExpenses {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-200%);
+    }
+}
+
+@keyframes slideFromExpensesToAll {
+    0%{
+        transform: translateX(-200%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.slideFromAllToCategories{
+    animation-name: slideFromAllToCategories;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.slideFromCategoriesToAll{
+    animation-name: slideFromCategoriesToAll;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideFromAllToCategories {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-300%);
+    }
+}
+
+@keyframes slideFromCategoriesToAll {
+    0%{
+        transform: translateX(-300%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideFromExpensesToAll {
+    0%{
+        transform: translateX(-200%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.slideFromIncomesToExpenses{
+    animation-name: slideFromIncomesToExpenses;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.slideFromExpensesToIncomes{
+    animation-name: slideFromExpensesToIncomes;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideFromIncomesToExpenses {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(-200%);
+    }
+}
+
+@keyframes slideFromExpensesToIncomes {
+    0%{
+        transform: translateX(-200%);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+.slideFromIncomesToCategories{
+    animation-name: slideFromIncomesToCategories;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.slideFromCategoriesToIncomes{
+    animation-name: slideFromCategoriesToIncomes;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideFromIncomesToCategories {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(-300%);
+    }
+}
+
+@keyframes slideFromCategoriesToIncomes {
+    0%{
+        transform: translateX(-300%);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+.slideFromCategoriesToExpenses{
+    animation-name: slideFromCategoriesToExpenses;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.slideFromExpensesToCategories{
+    animation-name: slideFromExpensesToCategories;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideFromCategoriesToExpenses {
+    0%{
+        transform: translateX(-300%);
+    }
+    100%{
+        transform: translateX(-200%);
+    }
+}
+
+@keyframes slideFromExpensesToCategories {
+    0%{
+        transform: translateX(-200%);
+    }
+    100%{
+        transform: translateX(-300%);
+    }
+}

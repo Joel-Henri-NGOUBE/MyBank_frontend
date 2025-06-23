@@ -1,1 +1,197 @@
 @import "../pages.css";
+
+
+.statistics{
+justify-content: center;
+align-items: center;
+/* padding: 10px; */
+}
+
+.statistics .page{
+    padding: 50px 0 5px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 25px;
+    padding-bottom: 50px;
+}
+
+.statistics .slider-wrapper{
+    width: 420px;
+    display: flex;
+    overflow-x: hidden;
+    /* overflow-y: auto; */
+}
+
+.statistics .slider{
+    width: 100%;
+    display: flex;
+}
+
+.statistics .slider > *{
+    flex-shrink: 0;
+}
+
+.statistics .categories{
+    max-height: 500px;
+}
+
+.statistics button{
+    border: 2px solid var(--orange-500);
+    color: var(--orange-500);
+    background-color: var(--white);
+    /* border-radius: 2px; */
+    font-size: var(--label1-size);
+    font-weight: var(--label1-weight);
+}
+
+.slide{
+    animation-name: slide;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.slide-back{
+    animation-name: slideBack;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide {
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideBack {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.page-title, .page-subtitle{
+    font-size: var(--h4-size);
+    font-weight: var(--h4-weight);
+}
+
+.statistics span.category, .statistics span.percentage{
+    font-size: 20px;
+    font-weight: var(--h4-weight);
+}
+
+.statistics .total{
+    font-size: var(--h2-size);
+    font-weight: 600;
+}
+
+.statistics div.expenses, .statistics div.incomes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 40px;
+}
+
+.statistics .expenses .total{
+    color: var(--negative-red)
+}
+
+.statistics .incomes .total{
+    color: var(--positive-green)
+}
+
+.statistics div.category{
+    display: flex;
+    padding: 20px;
+}
+
+.statistics span.category{
+    text-transform: capitalize;
+    width: 300px;
+}
+
+.statistics .incomes .categories div:nth-of-type(1) span.percentage{
+    color: var(--green-700);
+}
+
+.statistics .incomes .categories div:nth-of-type(2) span.percentage{
+    color: var(--orange-500);
+}
+
+.statistics .incomes .categories div:nth-of-type(3) span.percentage{
+    color: var(--red-400);
+}
+
+.statistics .incomes .categories div:nth-of-type(4) span.percentage{
+    color: var(--blue-400);
+}
+
+.statistics .incomes .categories div:nth-of-type(5) span.percentage{
+    color: var(--orange-600);
+}
+
+.statistics .incomes .categories div:nth-of-type(6) span.percentage{
+    color: var(--black-400);
+}
+
+.statistics .incomes .categories div:nth-of-type(7) span.percentage{
+    color: var(--green-600);
+}
+
+.statistics .incomes .categories div:nth-of-type(8) span.percentage{
+    color: var(--red-600);
+}
+
+.statistics .incomes .categories div:nth-of-type(9) span.percentage{
+    color: var(--blue-500);
+}
+
+/* -- */
+
+.statistics .expenses .categories div:nth-of-type(1) span.percentage{
+    color: var(--red-600);
+}
+
+.statistics .expenses .categories div:nth-of-type(2) span.percentage{
+    color: var(--orange-500);
+}
+
+.statistics .expenses .categories div:nth-of-type(3) span.percentage{
+    color: var(--blue-400);
+}
+
+.statistics .expenses .categories div:nth-of-type(4) span.percentage{
+    color: var(--black-400);
+}
+
+.statistics .expenses .categories div:nth-of-type(5) span.percentage{
+    color: var(--orange-600);
+}
+
+.statistics .expenses .categories div:nth-of-type(6) span.percentage{
+    color: var(--red-400);
+}
+
+.statistics .expenses .categories div:nth-of-type(7) span.percentage{
+    color: var(--green-600);
+}
+
+.statistics .expenses .categories div:nth-of-type(8) span.percentage{
+    color: var(--green-700);
+}
+
+.statistics .expenses .categories div:nth-of-type(9) span.percentage{
+    color: var(--blue-500);
+}
+
+
+
