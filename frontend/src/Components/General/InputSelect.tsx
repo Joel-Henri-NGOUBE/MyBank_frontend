@@ -5,7 +5,7 @@ export default function InputSelect({label, options}: IInputSelect){
         <label htmlFor={label.toLowerCase()}>{label}</label>
         <select name={label.toLowerCase()} id={label.toLowerCase()}>
             {options.map((op, index) => {
-                return index ? <option value={op}>{op}</option> : <option value="">{op}</option>})}
+                return index ? <option value={op} key={index}>{op}</option> : <option value="" key={index}>{op}</option>})}
         </select>
     </div>
 }

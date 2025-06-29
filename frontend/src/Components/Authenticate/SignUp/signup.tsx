@@ -2,8 +2,10 @@ import InputLabel from "../../General/InputLabel";
 import GreenBank from "../../../assets/greenbank.svg"
 import "./signup.css"
 import Company from "../../Company/company";
+import { useNavigate } from "react-router";
 
 export default function SignUp(){
+    const navigate : Function = useNavigate()
     return <div className="signup">
     
             <Company 
@@ -15,7 +17,7 @@ export default function SignUp(){
             <div className="inputs">
                 <InputLabel
                 label="Mail"
-                placeholder="Mail adress"
+                placeholder="Mail address"
                 type="text"
                 />
     
@@ -31,7 +33,6 @@ export default function SignUp(){
                 type="text"
                 />
             </div>
-    
-            <button>Sign up</button>
+            <button onClick={() => navigate("/operations")}>Sign up</button>
         </div>
 }

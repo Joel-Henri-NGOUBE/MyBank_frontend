@@ -21,7 +21,7 @@ export default function Statistics(){
                 acc.push({label: cur.category.toUpperCase(), value: parseFloat(((cur.amount/incomesTotal)*100).toFixed(2))})
                 return acc
             }, [])
-    console.log(incomeData)
+    // console.log(incomeData)
     const expenses: IOperation[] = operations.filter(op => op.type === "expense")
     const expensesTotal: number = expenses.reduce((acc, cur) => cur.amount + acc, 0)
     const expenseData: {label: string, value: number}[] = expenses.reduce((acc: {label: string, value: number}[], cur) => { 
@@ -44,7 +44,7 @@ export default function Statistics(){
             // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
             // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
             }
-            console.log("Slide added")
+            // console.log("Slide added")
         }
     }
 
@@ -61,7 +61,7 @@ export default function Statistics(){
             // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
             // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
             }
-            console.log("Slide Back added")
+            // console.log("Slide Back added")
         }
     }
 
@@ -94,7 +94,7 @@ export default function Statistics(){
                             width={200}
                         />
                         <div className="categories">
-                            {incomes.map(i => <div className="category"><span className="category">{i.category}</span><span className="percentage">{((i.amount/incomesTotal)*100).toFixed(2)} %</span></div>)}
+                            {incomes.map((i, index) => <div className="category" key={index}><span className="category">{i.category}</span><span className="percentage">{((i.amount/incomesTotal)*100).toFixed(2)} %</span></div>)}
 
                         </div>
                     </div>
@@ -117,7 +117,7 @@ export default function Statistics(){
                             width={200}
                         />
                         <div className="categories">
-                            {expenses.map(i => <div className="category"><span className="category">{i.category}</span><span className="percentage">{((i.amount/expensesTotal)*100).toFixed(2)} %</span></div>)}
+                            {expenses.map((i, index) => <div className="category" key={index}><span className="category">{i.category}</span><span className="percentage">{((i.amount/expensesTotal)*100).toFixed(2)} %</span></div>)}
                         </div>
 
                     </div>

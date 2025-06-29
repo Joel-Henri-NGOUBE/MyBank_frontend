@@ -43,6 +43,7 @@
     padding: 15px 100px;
     border: 1px solid var(--red-500);
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .management .actions > * > span{

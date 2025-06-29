@@ -48,6 +48,13 @@
     height: 500px;
 }
 
+.operations .operations-wrapper .sub + div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
 .operations .operations-wrapper .sub{
     display: flex;
     flex-wrap: wrap;

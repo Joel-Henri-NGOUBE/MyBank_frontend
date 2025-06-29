@@ -1,28 +1,28 @@
 import { useState } from "react";
 import Header from "../../Components/Header/header";
 import "./management.css"
-import ManagementHeader from "../../Components/ManagementHeader/Managementheader";
+// import ManagementHeader from "../../Components/ManagementHeader/Managementheader";
 import Tracking from "../../Components/ManagementComponents/Tracking/tracking";
 import Investing from "../../Components/ManagementComponents/Investing/investing";
 import Saving from "../../Components/ManagementComponents/Saving/saving";
 
 export default function Management(){
-    const [pages, setPages] = useState<boolean[]>([false, false, false, true])
+    const [pages, setPages] = useState<boolean[]>([true, false, false, false])
     return <div className="management">
         <Header />
 
         {pages[0] && <div className="page">
                 <p id="introduction">What are you using <span>MyBank</span> for today ?</p>
                 <div className="actions">
-                    <div className="tracking">
+                    <div className="tracking" onClick={() => setPages([false, true, false, false])}>
                         <span>Tracking</span>
                         <p>Just list and retrieve all the incomes and expenses</p>
                     </div>
-                    <div className="investing">
+                    <div className="investing" onClick={() => setPages([false, false, true, false])}>
                         <span>Investing</span>
                         <p>List and retrieve all the incomes and expenses and generate benefits from your balance </p>
                     </div>
-                    <div className="saving">
+                    <div className="saving" onClick={() => setPages([false, false, false, true])}>
                         <span>Saving</span>
                         <p>List and retrieve all the incomes and expenses and put some money aside from your balance</p>
                     </div>

@@ -216,39 +216,43 @@ export default function Operations(){
                     <div className="operations-wrapper">
 
                         <div className="all">
-                            {operations.map(op => 
+                            {operations.map((op, index) => 
                                 <Operation 
                                     operation={op}
+                                    key={index}
                                 />
                             )}
                         </div>
 
                         <div className="incomes">
-                            {operations.filter(op => op.type === "income").map(op => 
+                            {operations.filter(op => op.type === "income").map((op, index) => 
                                 <Operation 
                                     operation={op}
+                                    key={index}
                                 />
                             )}
                         </div>
 
                         <div className="expenses">
-                            {operations.filter(op => op.type === "expense").map(op => 
+                            {operations.filter(op => op.type === "expense").map((op, index) => 
                                 <Operation 
                                     operation={op}
+                                    key={index}
                                 />
                             )}
                         </div>
 
                         <div className="categories">
                             <div className="sub">
-                                {categories.map((c) => 
-                                    <span className="category" onClick={() => setOperationsDisplayed(operations.filter(op => op.category === c))}>{c}</span>
+                                {categories.map((c, index) => 
+                                    <span className="category" key={index} onClick={() => setOperationsDisplayed(operations.filter(op => op.category === c))}>{c}</span>
                                 )}      
                             </div>
                             <div>
-                                {operationsDisplayed.map(op => 
+                                {operationsDisplayed.map((op, index) => 
                                     <Operation 
                                         operation={op}
+                                        key={index}
                                     />
                                 )}
                             </div>
