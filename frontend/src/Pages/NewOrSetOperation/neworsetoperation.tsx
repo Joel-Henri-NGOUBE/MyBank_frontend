@@ -15,7 +15,7 @@ export default function NewOrSetOperation(){
             <h3>New operation</h3>
 
             <div className="inputs">
-                <InputLabel 
+                {/* <InputLabel 
                 label="Label"
                 type="text"
                 placeholder="Name your operation"
@@ -25,7 +25,7 @@ export default function NewOrSetOperation(){
                 label="Amount"
                 type="number"
                 placeholder="1234,567"
-                />
+                /> */}
 
                 <InputSelect
                 label="Type"
@@ -37,11 +37,11 @@ export default function NewOrSetOperation(){
                 options={["Annual bonus","income", "expense"]} 
                 />
 
-                <InputLabel 
+                {/* <InputLabel 
                 label="Date"
                 type="date"
                 placeholder="JJ/MM/AAAA"
-                />
+                /> */}
             </div>
 
             <div className="buttons">
