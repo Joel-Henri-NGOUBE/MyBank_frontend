@@ -2,17 +2,23 @@ import InputLabel from "../../General/InputLabel";
 import GreenBank from "../../../assets/greenbank.svg"
 import "./signup.css"
 import Company from "../../Company/company";
-import { useNavigate } from "react-router";
+import { useNavigate, type NavigateFunction } from "react-router";
 import { useState, type ChangeEvent } from "react";
 import type { IInputsWithThreeValues } from "../../../Interfaces/inputValues";
-
+import type { ISignup } from "../../../Interfaces/APIResponses";
+// import process from "process";
 export default function SignUp(){
-    const navigate : Function = useNavigate()
+    const navigate : NavigateFunction = useNavigate()
 
     const [inputValues, setInputValues] = useState<IInputsWithThreeValues>({
         input1: "",
         input2: "",
         input3: ""
+    })
+
+    const [response, setResponse] = useState<ISignup>({
+        code: 0,
+        message: ""
     })
 
     function handleChange1(event: ChangeEvent<HTMLInputElement>){
@@ -26,6 +32,28 @@ export default function SignUp(){
     function handleChange3(event: ChangeEvent<HTMLInputElement>){
         setInputValues({...inputValues, input3: (event.target as HTMLInputElement).value})
         // console.log(inputValues)
+    }
+
+    function handleSignUp(inputValues: IInputsWithThreeValues){
+        // console.log(process)
+        // console.log(`${process.env}`)
+        // console.log(`${process}`)
+        console.log(import.meta.env.VITE_APP)
+        fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: inputValues.input1,
+                password: inputValues.input2
+            })
+        })
+        .then(res => res.json())
+        .then((res: ISignup) => {
+            setResponse(res)
+            console.log(res)
+        })
     }
 
     return <div className="signup">
@@ -61,6 +89,6 @@ export default function SignUp(){
                 handleChange={(e: ChangeEvent<HTMLInputElement>) => handleChange3(e)}
                 />
             </div>
-            <button onClick={handleSignUp}>Sign up</button>
+            <button onClick={() => handleSignUp(inputValues)}>Sign up</button>
         </div>
 }
