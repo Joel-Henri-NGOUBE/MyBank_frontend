@@ -4,7 +4,6 @@ import { MemoryRouter, Route, Routes } from "react-router"
 import Authenticate from "../../../Pages/Authenticate/authenticate"
 import Operations from "../../../Pages/Operations/operations"
 import Management from "../../../Pages/Management/management"
-import Settings from "../../../Pages/Settings/settings"
 import NewOrSetOperation from "../../../Pages/NewOrSetOperation/neworsetoperation"
 import Statistics from "../../../Pages/Statistics/statistics"
 
@@ -16,7 +15,6 @@ describe("Signin tests", () => {
                     <Route path="/" element={<Authenticate />} />
                     <Route path="/operations" element={<Operations />} />
                     <Route path="/management" element={<Management />} />
-                    <Route path="/settings" element={<Settings />} />
                     <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
                     <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
                     </Route>
@@ -37,7 +35,6 @@ describe("Signin tests", () => {
                     <Route path="/" element={<Authenticate />} />
                     <Route path="/operations" element={<Operations />} />
                     <Route path="/management" element={<Management />} />
-                    <Route path="/settings" element={<Settings />} />
                     <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
                     <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
                     </Route>

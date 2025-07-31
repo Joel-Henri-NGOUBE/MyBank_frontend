@@ -8,7 +8,6 @@ import type { IInputsWithThreeValues } from "../../../Interfaces/inputValues";
 import type { ISignup } from "../../../Interfaces/APIResponses";
 // import process from "process";
 export default function SignUp(){
-    const navigate : NavigateFunction = useNavigate()
 
     const [inputValues, setInputValues] = useState<IInputsWithThreeValues>({
         input1: "",
@@ -52,7 +51,6 @@ export default function SignUp(){
         .then(res => res.json())
         .then((res: ISignup) => {
             setResponse(res)
-            console.log(res)
         })
     }
 

@@ -3,7 +3,7 @@ import Tablist from "../../Components/TabList/tablist";
 import { PieChart } from '@mui/x-charts/PieChart';
 import type { IOperation } from "../../Interfaces/operation";
 import "./statistics.css"
-import { useNavigate } from "react-router";
+import { useNavigate, type NavigateFunction } from "react-router";
 import { useId } from "../Utils/useId";
 import { getNavigationStatusParameters } from "../Utils/getNavigationStateParameters";
 import { useEffect, useState } from "react";
@@ -21,31 +21,33 @@ export default function Statistics(){
 
     const [operations, setOperations] = useState<IOperation[]>()
 
-    const [navigate, token] = getNavigationStatusParameters()
+    const [id, setId] = useState<number>(0)
 
-    const [id, setId] = useId(token, navigate)
+    const navigate: NavigateFunction = useNavigate()
+
+    const token = localStorage.getItem("token")
 
     useEffect(() => {
-            const localToken = localStorage.getItem("token")
-            if(!token && localToken){
-                fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${localToken}`
-                            },
-                            body: JSON.stringify({
-                                email: (jwtDecode(localToken) as any).username
-                            })
-                        })
-                .then(res => {
-                    // (res.status.toString().startsWith("2")) && navigate("/operations");
-                    (!res.status.toString().startsWith("2")) && navigate("/")
-                    // (res.status === 200) && navigate("/operations")
-                    return res.json()
+            token
+            ?
+            fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    email: (jwtDecode(token) as any).username
+                })
+            })
+            .then(res => {
+                // (res.status.toString().startsWith("2")) && navigate("/operations");
+                (!res.status.toString().startsWith("2")) && navigate("/")
+                // (res.status === 200) && navigate("/operations")
+                return res.json()
             })
             .then((res: {id: number}) => setId(res.id))
-            }
+            : navigate("/")
     }, [])
 
     useEffect(() => {

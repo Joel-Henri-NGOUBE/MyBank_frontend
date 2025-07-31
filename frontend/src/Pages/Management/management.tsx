@@ -8,36 +8,40 @@ import Saving from "../../Components/ManagementComponents/Saving/saving";
 import { getNavigationStatusParameters } from "../Utils/getNavigationStateParameters";
 import { useId } from "../Utils/useId";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate, type NavigateFunction } from "react-router";
 
 export default function Management(){
     const [pages, setPages] = useState<boolean[]>([true, false, false, false])
 
-    const [navigate, token] = getNavigationStatusParameters()
+    // const [navigate, token] = getNavigationStatusParameters()
 
-    const [id, setId] = useId(token, navigate)
+    // const [id, setId] = useId(token, navigate)
+
+    const navigate: NavigateFunction = useNavigate()
+
+    const localToken = localStorage.getItem("token")
 
     useEffect(() => {
-            const localToken = localStorage.getItem("token")
-            if(!token && localToken){
-                fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${localToken}`
-                            },
-                            body: JSON.stringify({
-                                email: (jwtDecode(localToken) as any).username
-                            })
+            localToken
+            ?
+            fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${localToken}`
+                        },
+                        body: JSON.stringify({
+                            email: (jwtDecode(localToken) as any).username
                         })
-                .then(res => {
-                    // (res.status === 200) && navigate("/operations")
-                    (!res.status.toString().startsWith("2")) && navigate("/")
-
-                return res.json()
+                    })
+            .then(res => {
+                (!res.status.toString().startsWith("2")) && navigate("/")
+            // return res.json()
             })
-            .then((res: {id: number}) => setId(res.id))
+            :
+            navigate("/")
             }
-        }, [])
+        , [])
 
     return <div className="management">
         <Header />

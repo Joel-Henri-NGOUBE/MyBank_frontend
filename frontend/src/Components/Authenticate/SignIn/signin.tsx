@@ -50,7 +50,6 @@ export default function SignIn(){
                     state: res
                 })
                 localStorage.setItem("token", res.token)
-                location.state = res
             }
         })
     }

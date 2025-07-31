@@ -11,7 +11,7 @@ export default function Header(){
     // const {unused, pathname, unused2} = location
     // console.log(location.pathname)
     function handleLogout(){
-        localStorage.removeItemItem("token")
+        localStorage.removeItem("token")
         navigate("/")
     }
 

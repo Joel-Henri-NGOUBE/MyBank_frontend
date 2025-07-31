@@ -7,7 +7,6 @@ import { Route, Routes, MemoryRouter } from "react-router";
 import Authenticate from "../Authenticate/authenticate";
 import Operations from "../Operations/operations";
 import Management from "./management";
-import Settings from "../Settings/settings";
 import NewOrSetOperation from "../NewOrSetOperation/neworsetoperation";
 import Statistics from "../Statistics/statistics";
 
@@ -20,7 +19,6 @@ describe("Management page tests", async () => {
                     <Route path="/" element={<Authenticate />} />
                     <Route path="/operations" element={<Operations />} />
                     <Route path="/management" element={<Management />} />
-                    <Route path="/settings" element={<Settings />} />
                     <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
                     <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
                     </Route>
@@ -50,7 +48,6 @@ describe("Management page tests", async () => {
                     <Route path="/" element={<Authenticate />} />
                     <Route path="/operations" element={<Operations />} />
                     <Route path="/management" element={<Management />} />
-                    <Route path="/settings" element={<Settings />} />
                     <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
                     <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
                     </Route>
@@ -80,7 +77,6 @@ describe("Management page tests", async () => {
                     <Route path="/" element={<Authenticate />} />
                     <Route path="/operations" element={<Operations />} />
                     <Route path="/management" element={<Management />} />
-                    <Route path="/settings" element={<Settings />} />
                     <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
                     <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
                     </Route>

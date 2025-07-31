@@ -5,11 +5,11 @@ import "./operation.css"
 import { Link } from "react-router"
 
 
-export default function Operation({operation, operationId, handleDelete, token}: {operation: IOperation, operationId: number, handleDelete: Function, token: string}){
+export default function Operation({operation, operationId, handleDelete}: {operation: IOperation, operationId: number, handleDelete: Function}){
 
     return <div className="operation" onMouseEnter={(e) => {((e.currentTarget as HTMLDivElement).childNodes[0] as HTMLDivElement).style.display = "flex"}} onMouseLeave={(e) => {((e.currentTarget as HTMLDivElement).childNodes[0] as HTMLDivElement).style.display = "none"}}>
             <div className="actions" style={{display: "none"}}>
-                <Link to={`/neworsetoperation/${operationId}`} state={{token: token}}>
+                <Link to={`/neworsetoperation/${operationId}`}>
                     <img src={Modify} alt="modify" />
                 </Link>
                 <div onClick={() => handleDelete()}>
