@@ -1,13 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../Components/Header/header";
 import "./management.css"
 // import ManagementHeader from "../../Components/ManagementHeader/Managementheader";
 import Tracking from "../../Components/ManagementComponents/Tracking/tracking";
 import Investing from "../../Components/ManagementComponents/Investing/investing";
 import Saving from "../../Components/ManagementComponents/Saving/saving";
+import { getNavigationStatusParameters } from "../Utils/getNavigationStateParameters";
+import { useId } from "../Utils/useId";
+import { jwtDecode } from "jwt-decode";
 
 export default function Management(){
     const [pages, setPages] = useState<boolean[]>([true, false, false, false])
+
+    const [navigate, token] = getNavigationStatusParameters()
+
+    const [id, setId] = useId(token, navigate)
+
+    useEffect(() => {
+            const localToken = localStorage.getItem("token")
+            if(!token && localToken){
+                fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${localToken}`
+                            },
+                            body: JSON.stringify({
+                                email: (jwtDecode(localToken) as any).username
+                            })
+                        })
+                .then(res => {
+                    // (res.status === 200) && navigate("/operations")
+                    (!res.status.toString().startsWith("2")) && navigate("/")
+
+                return res.json()
+            })
+            .then((res: {id: number}) => setId(res.id))
+            }
+        }, [])
+
     return <div className="management">
         <Header />
 

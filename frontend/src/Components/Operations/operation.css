@@ -9,10 +9,11 @@
     align-items: center;
     border: 1px solid var(--gray-500);
     width: max-content;
+    position: relative;
 }
 
 .operations .operation p{
-    width: 350px;
+    max-width: 350px;
 }
 
 .operations .operation span.category{
@@ -34,6 +35,18 @@
 
 .operations .operation span.income{
     color: var(--positive-green);
+
+}
+
+.operations .operation .actions{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(244, 244, 244, 0.6);
+    border-radius: 20px;
 
 }
 

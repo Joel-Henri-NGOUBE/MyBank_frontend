@@ -2,7 +2,7 @@ import InputLabel from "../../General/InputLabel";
 import WhiteBank from "../../../assets/whitebank.svg"
 import "./signin.css"
 import Company from "../../Company/company";
-import { useNavigate, type NavigateFunction } from "react-router";
+import { useLocation, useNavigate, type NavigateFunction } from "react-router";
 import type { IInputsWithTwoValues } from "../../../Interfaces/inputValues";
 import { useState, type ChangeEvent } from "react";
 import type { TLogin} from "../../../Interfaces/APIResponses";
@@ -15,6 +15,8 @@ export default function SignIn(){
             input1: "",
             input2: ""
     })
+
+    const location = useLocation()
 
     const [response, setResponse] = useState<TLogin>({
         code: 0,
@@ -29,7 +31,7 @@ export default function SignIn(){
         setInputValues({...inputValues, input2: (event.target as HTMLInputElement).value})
     }
 
-    function handleSignIn(inputValues: IInputsWithTwoValues, navigate: Function){
+    function handleSignIn(inputValues: IInputsWithTwoValues){
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/login_check"].join(""), {
             method: "POST",
             headers: {
@@ -43,10 +45,12 @@ export default function SignIn(){
         .then(res => res.json())
         .then((res: TLogin) => {
             setResponse(res);
-            console.log(res);
-            console.log("token" in res);
             if("token" in res){
-                navigate();
+                navigate("/operations", {
+                    state: res
+                })
+                localStorage.setItem("token", res.token)
+                location.state = res
             }
         })
     }
@@ -78,6 +82,6 @@ export default function SignIn(){
 
         </div>
 
-        <button onClick={() => handleSignIn(inputValues, () => navigate("/operations"))}>Sign in</button>
+        <button onClick={() => handleSignIn(inputValues)}>Sign in</button>
     </div>
 }

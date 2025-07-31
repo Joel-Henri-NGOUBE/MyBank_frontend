@@ -1,7 +1,7 @@
 export interface IOperation{
+    id: number,
     label: string,
     category: string,
     amount: number,
-    type: "income" | "expense"
-    date: string
+    type: "INCOME" | "EXPENSE"
 }

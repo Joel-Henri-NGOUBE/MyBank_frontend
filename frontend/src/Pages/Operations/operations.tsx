@@ -1,30 +1,79 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate, type NavigateFunction } from "react-router";
 import Header from "../../Components/Header/header";
 import Operation from "../../Components/Operations/operation";
 import Tablist from "../../Components/TabList/tablist";
 import type { IOperation } from "../../Interfaces/operation";
 import "./operations.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { ILoginSuccess } from "../../Interfaces/APIResponses";
+import { jwtDecode } from "jwt-decode";
+import { categories } from "../../Interfaces/categories";
+import { getNavigationStatusParameters } from "../Utils/getNavigationStateParameters";
+import { useId } from "../Utils/useId";
 
 export default function Operations(){
 
-    const operations: IOperation[] = [
-        {label: "VIREMENT RECU DE: AIRBUS FRANCE SAS\nREF:FR2025:48:456355:34334:34", category: "salary", type: "income", amount: 1750, date: "29/05/2025"},
-        {label: "PAIEMENT CARTE J85475\nREF:FR2025:48:456355:34334:34", category: "courses", type: "expense", amount: 150.67, date: "29/05/2025"},
-        {label: "VIREMENT RECU DE: AIRBUS FRANCE SAS\nREF:FR2025:48:456355:34334:34", category: "payment", type: "income", amount: 170.98, date: "29/05/2025"},
-        {label: "PRELEVEMENT IMPÔT\nREF:FR2025:48:456355:34334:34", category: "tax", type: "expense", amount: 15.17, date: "29/05/2025"},
-        {label: "PRELEVEMENT SEPA ABONNEMENT\nREF:FR2025:48:456355:34334:34", category: "subscription", type: "expense", amount: 130.56, date: "29/05/2025"},
-    ]
+    const [operations, setOperations] = useState<IOperation[]>([])
 
-    const [operationsDisplayed, setOperationsDisplayed] = useState<IOperation[]>(operations)
+    const [operationsDisplayed, setOperationsDisplayed] = useState<IOperation[]>([])
 
-    const categories = ["salary", "courses", "payment", "tax", "subscription"]
+    // const categories = ["salary", "courses", "payment", "tax", "subscription"]
 
-    // const result = Object.
-    // console.log(operations.groupBy()
+    const [navigate, token] = getNavigationStatusParameters()
 
-    const navigate : Function = useNavigate()
-    
+    const [id, setId] = useId(token, navigate)
+
+    console.log(token)
+
+    useEffect(() => {
+        const localToken = localStorage.getItem("token")
+        if(!token && localToken){
+            fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${localToken}`
+                        },
+                        body: JSON.stringify({
+                            email: (jwtDecode(localToken) as any).username
+                        })
+                    })
+            .then(res => {
+                (!res.status.toString().startsWith("2")) && navigate("/");
+                return res.json()
+            })
+            .then((res: {id: number}) => setId(res.id))
+            console.log(1)
+        }
+    }, [])
+
+    useEffect(() => {
+        id &&
+        fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id,"/operations/"].join(""), {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    },
+                })
+        .then(res => res.json())
+        .then((res: any) => {
+            console.log(res.member)
+            setOperations(res.member)
+            setOperationsDisplayed(res.member)
+        })
+        console.log(2, id)
+    }, [id])
+
+    function handleDelete(operationId: number){
+        fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id, "/operations/", operationId].join(""), {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        setOperations(operations.filter(op => op.id !== operationId))
+        setOperationsDisplayed(operations.filter(op => op.id !== operationId))
+    }
 
     const allSlides: string[] = ["slideFromIncomesToAll","slideFromExpensesToAll","slideFromCategoriesToAll","slideFromAllToIncomes","slideFromExpensesToIncomes","slideFromCategoriesToIncomes","slideFromIncomesToExpenses","slideFromAllToExpenses","slideFromCategoriesToExpenses","slideFromIncomesToCategories","slideFromExpensesToCategories","slideFromAllToCategories"]
 
@@ -205,8 +254,8 @@ export default function Operations(){
         <div className="page">
             <span className="page-title">Balance</span>
             <span className="balance" 
-                style={operations.reduce((acc, cur) => cur.type === "income" ? acc + cur.amount : acc - cur.amount, 0) < 0 ? {color: "var(--negative-red)"} : {color: ""}}> 
-                    {operations.reduce((acc, cur) => cur.type === "income" ? acc + cur.amount : acc - cur.amount, 0)} €
+                style={operations.reduce((acc, cur) => cur.type === "INCOME" ? acc + cur.amount : acc - cur.amount, 0) < 0 ? {color: "var(--negative-red)"} : {color: ""}}> 
+                    {operations.reduce((acc, cur) => cur.type === "INCOME" ? acc + cur.amount : acc - cur.amount, 0).toFixed(2)} €
             </span>
             <div className="sliding">
                 <Tablist 
@@ -219,24 +268,33 @@ export default function Operations(){
                             {operations.map((op, index) => 
                                 <Operation 
                                     operation={op}
+                                    operationId={op.id}
+                                    token={token}
+                                    handleDelete={() => handleDelete(op.id)}
                                     key={index}
                                 />
                             )}
                         </div>
 
                         <div className="incomes">
-                            {operations.filter(op => op.type === "income").map((op, index) => 
+                            {operations.filter(op => op.type === "INCOME").map((op, index) => 
                                 <Operation 
                                     operation={op}
+                                    operationId={op.id}
+                                    token={token}
+                                    handleDelete={() => handleDelete(op.id)}
                                     key={index}
                                 />
                             )}
                         </div>
 
                         <div className="expenses">
-                            {operations.filter(op => op.type === "expense").map((op, index) => 
+                            {operations.filter(op => op.type === "EXPENSE").map((op, index) => 
                                 <Operation 
                                     operation={op}
+                                    operationId={op.id}
+                                    token={token}
+                                    handleDelete={() => handleDelete(op.id)}
                                     key={index}
                                 />
                             )}
@@ -252,6 +310,9 @@ export default function Operations(){
                                 {operationsDisplayed.map((op, index) => 
                                     <Operation 
                                         operation={op}
+                                        operationId={op.id}
+                                        token={token}
+                                        handleDelete={() => handleDelete(op.id)}
                                         key={index}
                                     />
                                 )}
@@ -261,8 +322,8 @@ export default function Operations(){
                 </div>
             </div>
             <div className="buttons">
-                <button onClick={() => navigate("/neworsetoperation")}>Add new operation</button>
-                <button onClick={() => navigate("/statistics")}>Access statistics</button>
+                <button onClick={() => navigate("/neworsetoperation", {state: {token: token}})}>Add new operation</button>
+                <button onClick={() => navigate("/statistics", {state: {token: token}})}>Access statistics</button>
             </div>
         </div>
         </div>

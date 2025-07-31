@@ -8,3 +8,10 @@ export interface IInputsWithThreeValues{
     input2: string,
     input3: string
 }
+
+export interface IInputsWithFourValues{
+    input1: string,
+    input2: string,
+    input3: string,
+    input4: string
+}
