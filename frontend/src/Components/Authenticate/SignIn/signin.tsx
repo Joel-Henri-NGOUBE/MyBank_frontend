@@ -2,11 +2,10 @@ import InputLabel from "../../General/InputLabel";
 import WhiteBank from "../../../assets/whitebank.svg"
 import "./signin.css"
 import Company from "../../Company/company";
-import { useLocation, useNavigate, type NavigateFunction } from "react-router";
+import { useNavigate, type NavigateFunction } from "react-router";
 import type { IInputsWithTwoValues } from "../../../Interfaces/inputValues";
 import { useState, type ChangeEvent } from "react";
 import type { TLogin} from "../../../Interfaces/APIResponses";
-// import {env} from "process";
 export default function SignIn(){
 
     const navigate : NavigateFunction = useNavigate()
@@ -16,9 +15,7 @@ export default function SignIn(){
             input2: ""
     })
 
-    const location = useLocation()
-
-    const [response, setResponse] = useState<TLogin>({
+    const [_, setResponse] = useState<TLogin>({
         code: 0,
         message: ""
     })
@@ -46,9 +43,7 @@ export default function SignIn(){
         .then((res: TLogin) => {
             setResponse(res);
             if("token" in res){
-                navigate("/operations", {
-                    state: res
-                })
+                navigate("/operations")
                 localStorage.setItem("token", res.token)
             }
         })

@@ -1,6 +1,5 @@
 import { screen, render } from "@testing-library/react"
 import InputLabel from "../../General/InputLabel"
-// import InputLabel from "./InputLabel"
 
 describe("InputLabel tests", () => {
     it("should be the active page", async () => {

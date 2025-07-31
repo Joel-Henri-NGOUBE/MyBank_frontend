@@ -30,8 +30,6 @@
     border: 2px solid var(--orange-500);
     color: var(--orange-500);
     background-color: var(--white);
-    /* border-radius: 2px; */
-    font-size: var(--label1-size);
     font-weight: var(--label1-weight);
 
 }
@@ -59,10 +57,6 @@
 input[type="date"], input[type="number"]{
     padding: 7px 7px 7px 20px !important;
 }
-
-/* .neworsetoperation select{
-    padding: 7px 20px;
-} */
 
 .neworsetoperation input[type="text"]{
     width: 290px;

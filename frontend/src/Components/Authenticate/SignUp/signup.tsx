@@ -2,11 +2,9 @@ import InputLabel from "../../General/InputLabel";
 import GreenBank from "../../../assets/greenbank.svg"
 import "./signup.css"
 import Company from "../../Company/company";
-import { useNavigate, type NavigateFunction } from "react-router";
 import { useState, type ChangeEvent } from "react";
 import type { IInputsWithThreeValues } from "../../../Interfaces/inputValues";
 import type { ISignup } from "../../../Interfaces/APIResponses";
-// import process from "process";
 export default function SignUp(){
 
     const [inputValues, setInputValues] = useState<IInputsWithThreeValues>({
@@ -15,7 +13,7 @@ export default function SignUp(){
         input3: ""
     })
 
-    const [response, setResponse] = useState<ISignup>({
+    const [_, setResponse] = useState<ISignup>({
         code: 0,
         message: ""
     })
@@ -30,14 +28,9 @@ export default function SignUp(){
 
     function handleChange3(event: ChangeEvent<HTMLInputElement>){
         setInputValues({...inputValues, input3: (event.target as HTMLInputElement).value})
-        // console.log(inputValues)
     }
 
     function handleSignUp(inputValues: IInputsWithThreeValues){
-        // console.log(process)
-        // console.log(`${process.env}`)
-        // console.log(`${process}`)
-        console.log(import.meta.env.VITE_APP)
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), {
             method: "POST",
             headers: {

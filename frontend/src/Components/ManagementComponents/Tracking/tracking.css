@@ -4,10 +4,8 @@
     border: 2px solid var(--red-500);
     color: var(--red-500);
     background-color: var(--white);
-    /* border-radius: 2px; */
     font-size: var(--label1-size);
     font-weight: var(--label1-weight);
-
 }
 
 div#tracking .body span{

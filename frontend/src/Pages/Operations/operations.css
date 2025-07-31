@@ -1,11 +1,5 @@
 @import "../pages.css";
 
-/* .slider{
-    display: flex;
-    overflow: hidden;
-    width: 100%; /*Trouver une meilleure valeur
-} */
-
 .operations .page{
     display: flex;
     flex-direction: column;

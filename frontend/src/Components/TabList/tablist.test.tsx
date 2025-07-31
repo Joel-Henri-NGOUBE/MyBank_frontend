@@ -1,5 +1,4 @@
 import { screen, render } from "@testing-library/react"
-// import InputSelect from "./InputSelect"
 import Tablist from "./tablist"
 
 describe("InputSelect tests", () => {

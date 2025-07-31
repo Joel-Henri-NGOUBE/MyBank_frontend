@@ -2,7 +2,6 @@ import { screen, render } from "@testing-library/react"
 import Statistics from "./statistics"
 import { Route, Routes, MemoryRouter } from "react-router";
 import Authenticate from "../Authenticate/authenticate";
-import Settings from "../Settings/settings";
 import Management from "../Management/management";
 import NewOrSetOperation from "../NewOrSetOperation/neworsetoperation";
 import Operations from "../Operations/operations";
@@ -15,7 +14,6 @@ describe("Statistics page tests", () => {
                     <Route path="/" element={<Authenticate />} />
                     <Route path="/operations" element={<Operations />} />
                     <Route path="/management" element={<Management />} />
-                    <Route path="/settings" element={<Settings />} />
                     <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
                     <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
                     </Route>
@@ -40,7 +38,6 @@ describe("Statistics page tests", () => {
                     <Route path="/" element={<Authenticate />} />
                     <Route path="/operations" element={<Operations />} />
                     <Route path="/management" element={<Management />} />
-                    <Route path="/settings" element={<Settings />} />
                     <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
                     <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
                     </Route>

@@ -5,23 +5,17 @@ import Header from "../../Components/Header/header";
 import "./neworsetoperation.css"
 import { useEffect, useState, type ChangeEvent } from "react";
 import type { IInputsWithFourValues } from "../../Interfaces/inputValues";
-import { getNavigationStatusParameters } from "../Utils/getNavigationStateParameters";
-import { useId } from "../Utils/useId";
 import { jwtDecode } from "jwt-decode";
 import type { IOperation } from "../../Interfaces/operation";
 
 export default function NewOrSetOperation(){
-    
-    // const [navigate, token] = getNavigationStatusParameters()
-    
-    // const [id, setId] = useId(token, navigate)
 
     const [id, setId] = useState<number>(0)
 
     const navigate: NavigateFunction = useNavigate()
 
     const token = localStorage.getItem("token")
-    
+
     useEffect(() => {
         token ?
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
@@ -45,11 +39,6 @@ export default function NewOrSetOperation(){
 
     const operationId = "id" in useParams() ? (useParams() as {id: string}).id : null;
 
-    // console.log(useParams())
-    // console.log(operationId)
-
-    // const [operation, setOperation] = useState()
-
     useEffect(() => {
         (id && operationId) &&
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id, "/operations/", operationId].join(""), {
@@ -64,7 +53,6 @@ export default function NewOrSetOperation(){
         .then((res: IOperation) => {
             let capitalizedCategory = res.category.toLowerCase()
             capitalizedCategory = capitalizedCategory[0].toUpperCase() + capitalizedCategory.substring(1)
-            // console.log(capitalizedCategory)
             setInputValues({
                 input1: res.label,
                 input2: res.amount.toString(),
@@ -120,67 +108,45 @@ export default function NewOrSetOperation(){
     }
 
     function handleChange4(event: ChangeEvent<HTMLSelectElement>){
-        setInputValues(
-            inputValues => {
-                console.log(inputValues)
-                return{...inputValues, input4: (event.target as HTMLSelectElement).value}
-        }
-        )
-        // console.log(inputValues)
+        setInputValues({...inputValues, input4: (event.target as HTMLSelectElement).value})
     }
 
     function createOperation(inputValues: IInputsWithFourValues, navigate: Function){
-        // useEffect(() => {
-                // token && 
-                // setInputValues({...inputValues, input3: inputValues.input3.toUpperCase(), input4: inputValues.input3.toLowerCase()})
-                console.log({
-                                label: inputValues.input1,
-                                amount: parseFloat(parseFloat(inputValues.input2).toFixed(2)),
-                                type: inputValues.input3.toUpperCase(),
-                                category: inputValues.input4.toUpperCase()
-                            })
-                    console.log(JSON.stringify({
-                                label: inputValues.input1,
-                                amount: parseFloat(inputValues.input2).toFixed(2),
-                                type: inputValues.input3.toUpperCase(),
-                                category: inputValues.input4.toUpperCase()
-                            }))
-                !operationId
-                ?
-                fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id, "/operations"].join(""), {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${token}`
-                            },
-                            body: JSON.stringify({
-                                label: inputValues.input1,
-                                amount: parseFloat(parseFloat(inputValues.input2).toFixed(2)),
-                                type: inputValues.input3.toUpperCase(),
-                                category: inputValues.input4.toUpperCase()
-                            })
-                        })
-                .then(res => {
-                    res.status === 200 && navigate()
+        !operationId
+        ?
+        fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id, "/operations"].join(""), {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        label: inputValues.input1,
+                        amount: parseFloat(parseFloat(inputValues.input2).toFixed(2)),
+                        type: inputValues.input3.toUpperCase(),
+                        category: inputValues.input4.toUpperCase()
+                    })
                 })
-                :
-                fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id, "/operations/", operationId].join(""), {
-                            method: "PATCH",
-                            headers: {
-                                "Content-Type": "application/merge-patch+json",
-                                "Authorization": `Bearer ${token}`
-                            },
-                            body: JSON.stringify({
-                                label: inputValues.input1,
-                                amount: parseFloat(parseFloat(inputValues.input2).toFixed(2)),
-                                type: inputValues.input3.toUpperCase(),
-                                category: inputValues.input4.toUpperCase()
-                            })
-                        })
-                .then(res => {
-                    res.status === 200 && navigate()
+        .then(res => {
+            res.status === 200 && navigate()
+        })
+        :
+        fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id, "/operations/", operationId].join(""), {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/merge-patch+json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        label: inputValues.input1,
+                        amount: parseFloat(parseFloat(inputValues.input2).toFixed(2)),
+                        type: inputValues.input3.toUpperCase(),
+                        category: inputValues.input4.toUpperCase()
+                    })
                 })
-                // }, [])
+        .then(res => {
+            res.status === 200 && navigate()
+        })
     }
     
     return <div className="neworsetoperation">
@@ -220,18 +186,11 @@ export default function NewOrSetOperation(){
                 handleChange={(e: ChangeEvent<HTMLSelectElement>) => handleChange4(e)} 
                 />
 
-                {/* <InputLabel 
-                label="Date"
-                type="date"
-                placeholder="JJ/MM/AAAA"
-                inputValue={inputValues.input3}
-                handleChange={(e: ChangeEvent<HTMLInputElement>) => handleChange3(e)}
-                /> */}
             </div>
 
             <div className="buttons">
                 <button onClick={() => navigate("/operations", {state: {token: token}})}>Get back to operations</button>
-                <button onClick={() => createOperation(inputValues, () => navigate("/operations", {state: {token: token}}))}>Save operation</button>
+                <button onClick={() => createOperation(inputValues, () => navigate("/operations"))}>Save operation</button>
             </div>
 
         </div>

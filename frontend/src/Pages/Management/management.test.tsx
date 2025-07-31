@@ -1,8 +1,6 @@
 import { screen, render } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 
-// import Authenticate from "./authenticate"
-// import Management from "./management"
 import { Route, Routes, MemoryRouter } from "react-router";
 import Authenticate from "../Authenticate/authenticate";
 import Operations from "../Operations/operations";

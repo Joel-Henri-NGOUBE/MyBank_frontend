@@ -4,7 +4,6 @@
 .statistics{
 justify-content: center;
 align-items: center;
-/* padding: 10px; */
 }
 
 .statistics .page{
@@ -21,7 +20,6 @@ align-items: center;
     width: 420px;
     display: flex;
     overflow-x: hidden;
-    /* overflow-y: auto; */
 }
 
 .statistics .slider{
@@ -41,7 +39,6 @@ align-items: center;
     border: 2px solid var(--orange-500);
     color: var(--orange-500);
     background-color: var(--white);
-    /* border-radius: 2px; */
     font-size: var(--label1-size);
     font-weight: var(--label1-weight);
 }

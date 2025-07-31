@@ -11,7 +11,6 @@ span.tab{
     border-color: var(--orange-500);
     text-transform: capitalize;
     padding: 20px 50px;
-    /* border-bottom: 5px; */
 }
 
 .tablist .tab.clicked{
@@ -23,7 +22,3 @@ span.tab{
 .tablist .tab{
     cursor: pointer;
 }
-
-/* span.tab:nth-of-type(2){
-    text-transform: capitalize;
-} */

@@ -1,15 +1,12 @@
-import { useLocation, useNavigate, type NavigateFunction } from "react-router";
 import Header from "../../Components/Header/header";
 import Operation from "../../Components/Operations/operation";
 import Tablist from "../../Components/TabList/tablist";
 import type { IOperation } from "../../Interfaces/operation";
 import "./operations.css"
 import { useEffect, useState } from "react";
-import type { ILoginSuccess } from "../../Interfaces/APIResponses";
 import { jwtDecode } from "jwt-decode";
 import { categories } from "../../Interfaces/categories";
-import { getNavigationStatusParameters } from "../Utils/getNavigationStateParameters";
-import { useId } from "../Utils/useId";
+import { useNavigate, type NavigateFunction } from "react-router";
 
 export default function Operations(){
 
@@ -63,7 +60,6 @@ export default function Operations(){
             setOperations(res.member)
             setOperationsDisplayed(res.member)
         })
-        console.log(2, id)
     }, [id])
 
     function handleDelete(operationId: number){
@@ -320,8 +316,8 @@ export default function Operations(){
                 </div>
             </div>
             <div className="buttons">
-                <button onClick={() => navigate("/neworsetoperation", {state: {token: token}})}>Add new operation</button>
-                <button onClick={() => navigate("/statistics", {state: {token: token}})}>Access statistics</button>
+                <button onClick={() => navigate("/neworsetoperation")}>Add new operation</button>
+                <button onClick={() => navigate("/statistics")}>Access statistics</button>
             </div>
         </div>
         </div>

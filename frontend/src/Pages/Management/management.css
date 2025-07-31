@@ -15,18 +15,6 @@
     padding-bottom: 40px;
 }
 
-/* .management div#tracking, .management div#investing, .management div#saving{
-    width: 100%;
-    height: calc(100% - 110px);
-    display: flex;
-    row-gap: 40px;
-    margin-top: 50px; */
-    /*margin-top: 15vmin; /*utiliser vmax pour les mobiles*/
-    /* flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
-
 .management div.actions{
     display: flex;
     flex-direction: column;
@@ -71,18 +59,3 @@
 .management #introduction span{
     color: var(--red-500);
 }
-
-
-
-
-
-/* .management .page > div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    width: 100%;
-    height: 100% !important;
-    min-height: 100%;
-} */

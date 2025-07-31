@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react";
 import Header from "../../Components/Header/header";
 import "./management.css"
-// import ManagementHeader from "../../Components/ManagementHeader/Managementheader";
 import Tracking from "../../Components/ManagementComponents/Tracking/tracking";
 import Investing from "../../Components/ManagementComponents/Investing/investing";
 import Saving from "../../Components/ManagementComponents/Saving/saving";
-import { getNavigationStatusParameters } from "../Utils/getNavigationStateParameters";
-import { useId } from "../Utils/useId";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate, type NavigateFunction } from "react-router";
 
 export default function Management(){
     const [pages, setPages] = useState<boolean[]>([true, false, false, false])
-
-    // const [navigate, token] = getNavigationStatusParameters()
-
-    // const [id, setId] = useId(token, navigate)
 
     const navigate: NavigateFunction = useNavigate()
 
@@ -36,7 +29,6 @@ export default function Management(){
                     })
             .then(res => {
                 (!res.status.toString().startsWith("2")) && navigate("/")
-            // return res.json()
             })
             :
             navigate("/")

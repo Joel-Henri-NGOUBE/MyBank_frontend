@@ -4,20 +4,10 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import type { IOperation } from "../../Interfaces/operation";
 import "./statistics.css"
 import { useNavigate, type NavigateFunction } from "react-router";
-import { useId } from "../Utils/useId";
-import { getNavigationStatusParameters } from "../Utils/getNavigationStateParameters";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 export default function Statistics(){
-
-    // const operations: IOperation[] = [
-    //                         // {label: "VIREMENT RECU DE: AIRBUS FRANCE SAS\nREF:FR2025:48:456355:34334:34", category: "salary", type: "INCOME", amount: 1750, date: "29/05/2025"},
-    //                         // {label: "PAIEMENT CARTE J85475\nREF:FR2025:48:456355:34334:34", category: "courses", type: "EXPENSE", amount: 150.67, date: "29/05/2025"},
-    //                         // {label: "VIREMENT RECU DE: AIRBUS FRANCE SAS\nREF:FR2025:48:456355:34334:34", category: "payment", type: "INCOME", amount: 170.98, date: "29/05/2025"},
-    //                         // {label: "PRELEVEMENT IMPÔT\nREF:FR2025:48:456355:34334:34", category: "tax", type: "EXPENSE", amount: 15.17, date: "29/05/2025"},
-    //                         // {label: "PRELEVEMENT SEPA ABONNEMENT\nREF:FR2025:48:456355:34334:34", category: "subscription", type: "EXPENSE", amount: 130.56, date: "29/05/2025"},
-    //                 ]
 
     const [operations, setOperations] = useState<IOperation[]>()
 
@@ -41,9 +31,7 @@ export default function Statistics(){
                 })
             })
             .then(res => {
-                // (res.status.toString().startsWith("2")) && navigate("/operations");
                 (!res.status.toString().startsWith("2")) && navigate("/")
-                // (res.status === 200) && navigate("/operations")
                 return res.json()
             })
             .then((res: {id: number}) => setId(res.id))
@@ -60,11 +48,8 @@ export default function Statistics(){
                 })
         .then(res => res.json())
         .then((res: any) => {
-            console.log(res.member)
             setOperations(res.member)
-            // setOperationsDisplayed(res.member)
         })
-        console.log(2, id)
     }, [id])
 
     const incomes: IOperation[] = operations?.filter(op => op.type === "INCOME") || []
@@ -73,16 +58,12 @@ export default function Statistics(){
                 acc.push({label: cur.category.toUpperCase(), value: parseFloat(((cur.amount/incomesTotal)*100).toFixed(2))})
                 return acc
             }, [])
-    // console.log(incomeData)
     const expenses: IOperation[] = operations?.filter(op => op.type === "EXPENSE") || []
     const expensesTotal: number = expenses.reduce((acc, cur) => cur.amount + acc, 0)
     const expenseData: {label: string, value: number}[] = expenses.reduce((acc: {label: string, value: number}[], cur) => { 
                 acc.push({label: cur.category.toUpperCase(), value: parseFloat(((cur.amount/expensesTotal)*100).toFixed(2))})
                 return acc
             }, [])
-
-    // const navigate : Function = useNavigate()
-
 
     function slide(){
         if(!(document.querySelector(".slider")as HTMLElement).classList.contains("slide")){
@@ -92,11 +73,7 @@ export default function Statistics(){
             (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.add("clicked")
             if((document.querySelector(".slider") as HTMLElement).classList.contains("slide-back")){
                 (document.querySelector(".slider") as HTMLElement).classList.remove("slide-back");
-
-            // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-            // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
             }
-            // console.log("Slide added")
         }
     }
 
@@ -109,11 +86,7 @@ export default function Statistics(){
 
             if((document.querySelector(".slider") as HTMLElement).classList.contains("slide")){
                 (document.querySelector(".slider") as HTMLElement).classList.remove("slide");
-
-            // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-            // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
             }
-            // console.log("Slide Back added")
         }
     }
 
@@ -175,7 +148,7 @@ export default function Statistics(){
                     </div>
                 </div>
             </div>
-            <button onClick={() => navigate("/operations", {state: {token: token}})}>Get back to operations</button>
+            <button onClick={() => navigate("/operations")}>Get back to operations</button>
         </div>
     </div>
 }

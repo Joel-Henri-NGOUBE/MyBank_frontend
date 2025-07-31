@@ -15,10 +15,6 @@
     align-items: center;
 }
 
-/* #root{
-    align-items: center; Mettre dans un useEffect
-} */
-
 .title{
     font-size: var(--h2-smaller-size);
     font-weight: var(--h2-smaller-weight);
@@ -28,7 +24,6 @@
 .signin label, .signup label{
     font-size: 18px;
     font-weight: var(--body1-weight);
-    /* color: var(--green-600); */
 }
 
 .signin .inputlabel, .signup .inputlabel{
