@@ -14,7 +14,6 @@ export default function Saving({pages, setPages}: ManagementPages){
 
     type Saving = typeof saving
 
-    // console.log(saving)
     useEffect(() => {
         getResult(saving)
     }, [saving.time, saving.amount, saving.date, saving.period])
@@ -47,11 +46,11 @@ export default function Saving({pages, setPages}: ManagementPages){
                 />
                 <div className="body">
                     <p>Combien souhaitez-vous mettre de côté pour épargne ?</p>
-                    <input type="number" placeholder="1234.67"value={saving.amount} onChange={(e) => setSaving({...saving, amount: parseInt(e.target.value)})}/>
+                    <input type="number" placeholder="1234.67" value={saving.amount} onChange={(e) => setSaving({...saving, amount: parseInt(e.target.value)})}/>
                     <p>Pour quelle fréquence souhaitez vous réaliser cette épargne  ?</p>
                     <div className="period">
-                        <input type="number" placeholder="1234"value={saving.time} onChange={(e) => setSaving({...saving, time: parseInt(e.target.value)})}/>
-                        <select name="" id=""value={saving.period} onChange={(e) => setSaving({...saving,  period: e.target.value})}>
+                        <input type="number" placeholder="1234" value={saving.time} onChange={(e) => setSaving({...saving, time: parseInt(e.target.value)})}/>
+                        <select name="" id="" value={saving.period} onChange={(e) => setSaving({...saving,  period: e.target.value})}>
                             <option value="days">jours</option>
                             <option value="month">mois</option>
                         </select>
