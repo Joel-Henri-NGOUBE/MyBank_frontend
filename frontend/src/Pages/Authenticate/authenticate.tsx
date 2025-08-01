@@ -10,8 +10,16 @@ export default function Authenticate(){
     
     useEffect(() => {
         const token = localStorage.getItem("token")
-        token && navigate("/operations")
+        token &&
+        fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/login_check"].join(""), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }})
+        .then(res => (res.status.toString().startsWith("2")) && navigate("/operations"))
     }, [])
+
+        
 
     return <div className="authenticate">
         <SignUp />

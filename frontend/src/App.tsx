@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import './App.css'
 import Operations from './Pages/Operations/operations';
 import Management from './Pages/Management/management';
 import Authenticate from './Pages/Authenticate/authenticate';
