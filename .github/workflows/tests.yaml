@@ -1,0 +1,25 @@
+name: React Vite Frontend
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: actions/setup-node
+        with:
+          node-version: 22.18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Running tests
+        run: npm run test
