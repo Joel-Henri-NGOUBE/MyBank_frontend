@@ -35,10 +35,6 @@ describe("InputSelect tests", () => {
         expect(options[2]).toHaveAttribute("value", "gmail")
         expect(options[3]).toHaveAttribute("value", "outlook")
         expect(options[4]).toHaveAttribute("value", "hotmail")
-        // options.forEach((op) => {
-        // })
-        // expect(option).toHaveAttribute("type", "text")
-        // expect(option).toHaveAttribute("placeholder", "Mail address")
 
     })
 })

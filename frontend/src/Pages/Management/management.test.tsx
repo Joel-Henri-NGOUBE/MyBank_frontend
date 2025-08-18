@@ -1,4 +1,4 @@
-import { screen, render, act } from "@testing-library/react"
+import { render, act } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 
 import { Route, Routes, MemoryRouter } from "react-router";

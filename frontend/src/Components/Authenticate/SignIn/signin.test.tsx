@@ -10,9 +10,8 @@ import { http, HttpResponse } from "msw"
 import jwt from "jsonwebtoken"
 
 const server = setupServer(
-    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async ({request, params}) => {
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async ({request}) => {
         const credentials = await request.json()
-        // console.log(credentials)
         const { email, password } : any = credentials
         if(email === "this@gmail.com" && password === "password"){
             return HttpResponse.json(
@@ -31,9 +30,8 @@ const server = setupServer(
             }
         )
     }),
-    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), async ({request, params}) => {
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), async ({request}) => {
         const credentials = await request.json()
-        console.log(credentials)
         const { email, password } : any = credentials
         if(email === "this@gmail.com" && password === "password"){
             return HttpResponse.json(

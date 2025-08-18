@@ -1,4 +1,4 @@
-import { screen, render, waitFor } from "@testing-library/react"
+import { render, waitFor } from "@testing-library/react"
 import Operations from "./operations"
 import { Route, Routes, MemoryRouter } from "react-router";
 import Authenticate from "../Authenticate/authenticate";
@@ -21,9 +21,7 @@ const operations: IOperation[] = [
     ]
 
 const server = setupServer(
-    http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async ({request, params}) => {
-        const { id } = params
-        console.log(id)
+    http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(
                 {
                     member: operations

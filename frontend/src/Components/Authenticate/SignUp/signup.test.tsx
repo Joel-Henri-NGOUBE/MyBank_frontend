@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import { MemoryRouter, Route, Routes } from "react-router"
 import Authenticate from "../../../Pages/Authenticate/authenticate"
 import Operations from "../../../Pages/Operations/operations"
@@ -8,13 +8,10 @@ import Statistics from "../../../Pages/Statistics/statistics"
 import { setupServer } from "msw/node"
 import { http, HttpResponse } from "msw"
 import jwt from "jsonwebtoken"
-// import userEvent from "@testing-library/user-event"
-
 
 const server = setupServer(
-    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async ({request, params}) => {
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async ({request}) => {
         const credentials = await request.json()
-        // console.log(credentials)
         const { email, password } : any = credentials
         if(email === "this@gmail.com" && password === "password"){
             return HttpResponse.json(
@@ -33,9 +30,8 @@ const server = setupServer(
             }
         )
     }),
-    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), async ({request, params}) => {
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), async ({request}) => {
         const credentials = await request.json()
-        console.log(credentials)
         const { email, password } : any = credentials
         if(email === "this@gmail.com" && password === "password"){
             return HttpResponse.json(

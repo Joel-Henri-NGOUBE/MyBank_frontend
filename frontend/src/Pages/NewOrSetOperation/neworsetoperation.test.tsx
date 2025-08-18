@@ -21,9 +21,7 @@ const operations: IOperation[] = [
     ]
 
 const server = setupServer(
-    http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async ({request, params}) => {
-        const { id } = params
-        console.log(id)
+    http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(
                 {
                     member: operations
@@ -34,9 +32,7 @@ const server = setupServer(
             )
         }
     ),
-    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async ({request, params}) => {
-        const { id } = params
-        console.log(id)
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(
                 {
                    

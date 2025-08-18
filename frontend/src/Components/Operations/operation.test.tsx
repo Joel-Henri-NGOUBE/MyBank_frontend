@@ -20,9 +20,7 @@ const operations: IOperation[] = [
     ]
 
 const server = setupServer(
-    http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async ({request, params}) => {
-        const { id } = params
-        console.log(id)
+    http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(
                 {
                     member: operations
@@ -87,7 +85,6 @@ describe("Signin tests", () => {
         const incomeOperations = await waitFor(() => document.querySelectorAll(".operations .incomes .operation"))
         const expenseOperations = await waitFor(() => document.querySelectorAll(".operations .expenses .operation"))
 
-        console.log("Le nombre d'opérations est", operations.length)
         expect(allOperations.length).toBe(5)
         expect(incomeOperations.length).toBe(2)
         expect(expenseOperations.length).toBe(3)

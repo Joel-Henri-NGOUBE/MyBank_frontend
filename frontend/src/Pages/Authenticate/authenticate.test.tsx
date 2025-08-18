@@ -1,4 +1,4 @@
-import { screen, render } from "@testing-library/react"
+import { render } from "@testing-library/react"
 import { Route, Routes, MemoryRouter } from "react-router";
 import Authenticate from "./authenticate"
 import Operations from "../Operations/operations";
@@ -7,16 +7,52 @@ import Statistics from "../Statistics/statistics";
 import Management from "../Management/management";
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
+import jwt from "jsonwebtoken"
 
 const server = setupServer(
-    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), () => {
+    http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(
-            {
-                message: "Expired JWT token"
-            }
-        )
-    })
+                {
+                    
+                },
+                {
+                    status: 200
+                }
+            )
+        }
+    ),
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async () => {
+        return HttpResponse.json(
+                {
+                    id: 1
+                },
+                {
+                    status: 200
+                }
+            )
+        }
+    ),
 )
+
+beforeAll(
+    () => {
+        server.listen()
+    }
+)
+
+afterEach(
+    () => {
+        server.resetHandlers()
+    }
+)
+afterAll(
+    () => {
+        server.close()
+    }
+)
+
+const token = jwt.sign({email: "this@gmail.com"},"THESECRETTOSIGN")
+localStorage.setItem("token", token)
 
 describe("Authenticate page tests", () => {
     it("should have 2 logos", async () => {

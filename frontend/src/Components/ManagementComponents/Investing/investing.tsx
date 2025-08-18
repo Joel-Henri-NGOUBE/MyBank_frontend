@@ -18,7 +18,6 @@ export default function Investing({pages, setPages}: ManagementPages){
     type Investing = typeof investing
 
     useEffect(() => {
-        console.log(investing)
         getResult(investing)
     }, [investing.time, investing.amount, investing.date, investing.period, investing.capital, investing.interest])
 
@@ -29,15 +28,12 @@ export default function Investing({pages, setPages}: ManagementPages){
         let time = parseFloat(investing.time)
         function getDays(firstDate: Date, secondDate: Date){
             const milliseconds =  secondDate.valueOf() - firstDate.valueOf()
-            console.log(milliseconds)
             const hours = parseInt(`${Math.floor(milliseconds / (1000 * 60 * 60))}`)
-            console.log(hours)
             return Math.floor(Math.abs(hours) / 24)
         }
         const days = getDays(new Date(investing.date), new Date(Date.now()))
         if(amount && time && capital && interest && interest > 0 && time > 0 && capital > 0 && amount > 0){
             const numberOfTimeInvested = investing.period === "days" ? Math.floor(days / time) : Math.floor(Math.floor(days / 30) / time)
-            console.log(numberOfTimeInvested)
             let investingResult = capital
             for(let i = 0; i < numberOfTimeInvested; i++){
                 investingResult = (investingResult + amount) * (1 + (interest / 100))

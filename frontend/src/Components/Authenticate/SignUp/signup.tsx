@@ -31,7 +31,6 @@ export default function SignUp(){
     }
 
     function handleSignUp(inputValues: IInputsWithThreeValues){
-        console.log([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""))
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), {
             method: "POST",
             headers: {
