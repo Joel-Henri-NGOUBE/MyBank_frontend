@@ -69,7 +69,7 @@ export default function SignIn(){
             <InputLabel 
             label="Password"
             placeholder="Your password"
-            type="text"
+            type="password"
             inputValue={inputValues.input2}
             handleChange={(e: ChangeEvent<HTMLInputElement>) => handleChange2(e)}
             />

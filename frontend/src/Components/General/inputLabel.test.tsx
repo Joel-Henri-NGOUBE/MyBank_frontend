@@ -8,8 +8,9 @@ describe("InputLabel tests", () => {
             label="Mail"
             placeholder="Mail address"
             type="text"
+            inputValue=""
+            handleChange={vi.fn()}
         />)
-
         expect(document.querySelector("label")).toHaveAttribute("for", "mail")
         expect(document.querySelector("label")).toHaveTextContent("Mail")
 
@@ -20,6 +21,8 @@ describe("InputLabel tests", () => {
             label="Mail"
             placeholder="Mail address"
             type="text"
+            inputValue=""
+            handleChange={vi.fn()}
         />)
 
         const input = screen.getByRole("textbox")

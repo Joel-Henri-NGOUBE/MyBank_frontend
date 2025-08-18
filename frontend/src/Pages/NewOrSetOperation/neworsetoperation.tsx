@@ -189,7 +189,7 @@ export default function NewOrSetOperation(){
             </div>
 
             <div className="buttons">
-                <button onClick={() => navigate("/operations", {state: {token: token}})}>Get back to operations</button>
+                <button onClick={() => navigate("/operations")}>Get back to operations</button>
                 <button onClick={() => createOperation(inputValues, () => navigate("/operations"))}>Save operation</button>
             </div>
 

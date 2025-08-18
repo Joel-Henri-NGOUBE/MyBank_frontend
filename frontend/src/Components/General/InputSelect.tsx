@@ -7,7 +7,6 @@ export default function InputSelect({label, options, inputValue, handleChange}: 
         <select name={label.toLowerCase()} id={label.toLowerCase()} value={inputValue} onChange={(e: ChangeEvent<HTMLSelectElement>) => handleChange(e)}>
             {options.map((op, index) => {
                 return <option value={op} key={index}>{op}</option>})}
-                {/* return index ? <option value={op} key={index}>{op}</option> : <option value="" key={index}>{op}</option>})} */}
         </select>
     </div>
 }

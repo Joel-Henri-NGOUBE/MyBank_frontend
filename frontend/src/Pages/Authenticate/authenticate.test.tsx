@@ -5,6 +5,18 @@ import Operations from "../Operations/operations";
 import NewOrSetOperation from "../NewOrSetOperation/neworsetoperation";
 import Statistics from "../Statistics/statistics";
 import Management from "../Management/management";
+import { setupServer } from "msw/node";
+import { http, HttpResponse } from "msw";
+
+const server = setupServer(
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), () => {
+        return HttpResponse.json(
+            {
+                message: "Expired JWT token"
+            }
+        )
+    })
+)
 
 describe("Authenticate page tests", () => {
     it("should have 2 logos", async () => {

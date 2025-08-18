@@ -31,6 +31,7 @@ export default function SignUp(){
     }
 
     function handleSignUp(inputValues: IInputsWithThreeValues){
+        console.log([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""))
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), {
             method: "POST",
             headers: {
@@ -67,7 +68,7 @@ export default function SignUp(){
                 <InputLabel 
                 label="Password"
                 placeholder="Your password"
-                type="text"
+                type="password"
                 inputValue={inputValues.input2}
                 handleChange={(e: ChangeEvent<HTMLInputElement>) => handleChange2(e)}
                 />
@@ -75,7 +76,7 @@ export default function SignUp(){
                 <InputLabel 
                 label="Confirm password"
                 placeholder="Retype your password"
-                type="text"
+                type="password"
                 inputValue={inputValues.input3}
                 handleChange={(e: ChangeEvent<HTMLInputElement>) => handleChange3(e)}
                 />

@@ -1,4 +1,4 @@
-import { screen, render } from "@testing-library/react"
+import { screen, render, act } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 
 import { Route, Routes, MemoryRouter } from "react-router";
@@ -7,11 +7,47 @@ import Operations from "../Operations/operations";
 import Management from "./management";
 import NewOrSetOperation from "../NewOrSetOperation/neworsetoperation";
 import Statistics from "../Statistics/statistics";
+import { http, HttpResponse } from "msw";
+import jwt from "jsonwebtoken";
+import { setupServer } from "msw/node";
+
+const server = setupServer(
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async () => {
+        return HttpResponse.json(
+                {
+                    id: 1
+                },
+                {
+                    status: 200
+                }
+            )
+        }
+    ),
+)
+
+beforeAll(
+    () => {
+        server.listen()
+    }
+)
+
+afterEach(
+    () => {
+        server.resetHandlers()
+    }
+)
+afterAll(
+    () => {
+        server.close()
+    }
+)
+
+const token = jwt.sign({email: "this@gmail.com"},"THESECRETTOSIGN")
+localStorage.setItem("token", token)
 
 describe("Management page tests", async () => {
     it("should hide default management interface and display tracking interface", async () => {
-
-        render(
+        await act(async () => render(
             <MemoryRouter initialEntries={["/management"]}>
                 <Routes>
                     <Route path="/" element={<Authenticate />} />
@@ -23,7 +59,7 @@ describe("Management page tests", async () => {
                     <Route path="/statistics" element={<Statistics />} />
                 </Routes>
             </MemoryRouter>
-        )
+        ))
         
         const divActions = document.querySelector("div.actions")
 
@@ -40,7 +76,7 @@ describe("Management page tests", async () => {
     })
     it("should hide default management interface and display investing interface", async () => {
 
-        render(
+        await act(async () => render(
             <MemoryRouter initialEntries={["/management"]}>
                 <Routes>
                     <Route path="/" element={<Authenticate />} />
@@ -52,7 +88,7 @@ describe("Management page tests", async () => {
                     <Route path="/statistics" element={<Statistics />} />
                 </Routes>
             </MemoryRouter>
-        )
+        ))
 
         const divActions = document.querySelector("div.actions")
 

@@ -12,28 +12,28 @@ export default function Management(){
 
     const navigate: NavigateFunction = useNavigate()
 
-    const localToken = localStorage.getItem("token")
+    const token = localStorage.getItem("token")
 
     useEffect(() => {
-            localToken
-            ?
-            fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${localToken}`
-                        },
-                        body: JSON.stringify({
-                            email: (jwtDecode(localToken) as any).username
-                        })
+        token
+        ?
+        fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        email: (jwtDecode(token) as any).username
                     })
-            .then(res => {
-                (!res.status.toString().startsWith("2")) && navigate("/")
-            })
-            :
-            navigate("/")
-            }
-        , [])
+                })
+        .then(res => {
+            (!res.status.toString().startsWith("2")) && navigate("/")
+        })
+        :
+        navigate("/")
+        }
+    , [])
 
     return <div className="management">
         <Header />

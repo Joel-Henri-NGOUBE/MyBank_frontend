@@ -14,12 +14,6 @@ export default function Operations(){
 
     const [operationsDisplayed, setOperationsDisplayed] = useState<IOperation[]>([])
 
-    // const categories = ["salary", "courses", "payment", "tax", "subscription"]
-
-    // const [navigate, token] = getNavigationStatusParameters()
-
-    // const [id, setId] = useId(token, navigate)
-
     const [id, setId] = useState<number>(0)
 
     const navigate: NavigateFunction = useNavigate()
@@ -56,7 +50,6 @@ export default function Operations(){
                 })
         .then(res => res.json())
         .then((res: any) => {
-            console.log(res.member)
             setOperations(res.member)
             setOperationsDisplayed(res.member)
         })
@@ -77,51 +70,30 @@ export default function Operations(){
 
     function slideToAll(){
         
-        // console.dir(
-            // Array.from(
         if((document.querySelector(".clicked") as HTMLElement).classList.contains("incomes")){
             allSlides.forEach(aS => {
                 (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
             });
             (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromIncomesToAll");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromExpensesToAll");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromCategoriesToAll");
-
+            
         }
         if((document.querySelector(".clicked") as HTMLElement).classList.contains("expenses")){
             allSlides.forEach(aS => {
                 (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
             });
             (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromExpensesToAll");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromIncomesToAll");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromCategoriesToAll");
-
+            
         }
         if((document.querySelector(".clicked") as HTMLElement).classList.contains("categories")){
             allSlides.forEach(aS => {
                 (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
             });
             (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromCategoriesToAll");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromIncomesToAll");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromExpensesToAll");
 
         }
         (document.querySelector(".clicked") as HTMLElement).classList.remove("clicked");
         (document.querySelector("span.all") as HTMLElement).classList.add("clicked");
-            // )
-        // )
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slide");
-
-            // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.remove("clicked");
-            // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.add("clicked")
-            // if((document.querySelector(".operations-wrapper") as HTMLElement).classList.contains("slide-back")){
-            //     (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slide-back");
-
-            // // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-            // // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
-            // }
-            // console.log("Slide added")
-        // }
+        
     }
 
     function slideToIncomes(){
@@ -130,17 +102,13 @@ export default function Operations(){
                 (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
             });
             (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromAllToIncomes");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromExpensesToIncomes");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromCategoriesToIncomes");
-
+ 
         }
         if((document.querySelector(".clicked") as HTMLElement).classList.contains("expenses")){
             allSlides.forEach(aS => {
                 (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
             });
             (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromExpensesToIncomes");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromAllToIncomes");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromCategoriesToIncomes");
 
         }
         if((document.querySelector(".clicked") as HTMLElement).classList.contains("categories")){
@@ -148,26 +116,10 @@ export default function Operations(){
                 (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
             });
             (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromCategoriesToIncomes");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromAllToIncomes");
-            // (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slideFromExpensesToIncomes");
-
+  
         }
         (document.querySelector(".clicked") as HTMLElement).classList.remove("clicked");
         (document.querySelector("span.incomes") as HTMLElement).classList.add("clicked");
-        // if(!(document.querySelector(".operations-wrapper") as HTMLElement).classList.contains("slide-back")){
-        //     (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slide-back");
-
-        //     (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-        //     (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
-
-        //     if((document.querySelector(".operations-wrapper") as HTMLElement).classList.contains("slide")){
-        //         (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slide");
-
-        //     // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-        //     // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
-        //     }
-        //     console.log("Slide Back added")
-        // }
     }
 
     function slideToExpenses(){
@@ -193,19 +145,6 @@ export default function Operations(){
         (document.querySelector(".clicked") as HTMLElement).classList.remove("clicked");
         (document.querySelector("span.expenses") as HTMLElement).classList.add("clicked");
 
-        // if(!(document.querySelector(".operations-wrapper")as HTMLElement).classList.contains("slide")){
-        //     (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slide");
-
-        //     (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.remove("clicked");
-        //     (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.add("clicked")
-        //     if((document.querySelector(".operations-wrapper") as HTMLElement).classList.contains("slide-back")){
-        //         (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove("slide-back");
-
-        //     // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-        //     // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
-        //     }
-        //     console.log("Slide added")
-        // }
     }
 
     function slideToCategories(){
@@ -231,20 +170,6 @@ export default function Operations(){
         (document.querySelector(".clicked") as HTMLElement).classList.remove("clicked");
         (document.querySelector("span.categories") as HTMLElement).classList.add("clicked");
 
-        // if(!(document.querySelector(".slider") as HTMLElement).classList.contains("slide-back")){
-        //     (document.querySelector(".slider") as HTMLElement).classList.add("slide-back");
-
-        //     (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-        //     (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
-
-        //     if((document.querySelector(".slider") as HTMLElement).classList.contains("slide")){
-        //         (document.querySelector(".slider") as HTMLElement).classList.remove("slide");
-
-        //     // (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-        //     // (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
-        //     }
-        //     console.log("Slide Back added")
-        // }
     }
 
     return <div className="operations">

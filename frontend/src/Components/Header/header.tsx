@@ -8,7 +8,8 @@ export default function Header(){
     const path = location.pathname
 
     const navigate: NavigateFunction = useNavigate()
-    function handleLogout(){
+    function handleLogout(e: any){
+        e.preventDefault()
         localStorage.removeItem("token")
         navigate("/")
     }
@@ -21,7 +22,7 @@ export default function Header(){
         <div className="links">
             <Link to="/operations" style={path === "/operations" ? {color: "var(--white)"} : {}}>operations</Link>
             <Link to="/management" style={path === "/management" ? {color: "var(--white)"} : {}}>management</Link>
-            <a href="" onClick={() => {handleLogout()}}>logout</a>
+            <a href="" onClick={(e) => {handleLogout(e)}}>logout</a>
         </div>
     </div>
 }

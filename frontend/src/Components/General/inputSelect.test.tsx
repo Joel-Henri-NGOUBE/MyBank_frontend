@@ -6,7 +6,9 @@ describe("InputSelect tests", () => {
 
         render(<InputSelect
             label="Mail"
-            options={["yahoo", "gmail", "outlook", "hotmail"]}
+            options={["default value", "yahoo", "gmail", "outlook", "hotmail"]}
+            inputValue=""
+            handleChange={vi.fn()}
         />)
 
         expect(document.querySelector("label")).toHaveAttribute("for", "mail")
@@ -18,6 +20,8 @@ describe("InputSelect tests", () => {
         render(<InputSelect
             label="Mail"
             options={["default value","yahoo", "gmail", "outlook", "hotmail"]}
+            inputValue=""
+            handleChange={vi.fn()}
         />)
 
         const select = screen.getByRole("combobox")
@@ -26,7 +30,7 @@ describe("InputSelect tests", () => {
 
         const options = screen.getAllByRole("option")
         
-        expect(options[0]).toHaveAttribute("value", "")
+        expect(options[0]).toHaveAttribute("value", "default value")
         expect(options[1]).toHaveAttribute("value", "yahoo")
         expect(options[2]).toHaveAttribute("value", "gmail")
         expect(options[3]).toHaveAttribute("value", "outlook")

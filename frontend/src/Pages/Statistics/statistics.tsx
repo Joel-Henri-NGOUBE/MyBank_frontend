@@ -9,7 +9,7 @@ import { jwtDecode } from "jwt-decode";
 
 export default function Statistics(){
 
-    const [operations, setOperations] = useState<IOperation[]>()
+    const [operations, setOperations] = useState<IOperation[]>([])
 
     const [id, setId] = useState<number>(0)
 
@@ -34,11 +34,13 @@ export default function Statistics(){
                 (!res.status.toString().startsWith("2")) && navigate("/")
                 return res.json()
             })
-            .then((res: {id: number}) => setId(res.id))
+            .then((res: {id: number}) => {console.log("From frontend", res.id); return setId(res.id)})
             : navigate("/")
     }, [])
 
     useEffect(() => {
+        console.log(id, "L'id")
+        console.log(operations)
         id &&
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id,"/operations/"].join(""), {
                     method: "GET",
@@ -48,6 +50,7 @@ export default function Statistics(){
                 })
         .then(res => res.json())
         .then((res: any) => {
+            console.log(res.member, "operations")
             setOperations(res.member)
         })
     }, [id])

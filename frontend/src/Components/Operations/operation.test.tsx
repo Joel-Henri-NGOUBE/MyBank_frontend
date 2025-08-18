@@ -1,46 +1,96 @@
-import { screen, render } from "@testing-library/react"
+import { act, render, waitFor } from "@testing-library/react"
 import Operation from "./operation"
 import type { IOperation } from "../../Interfaces/operation"
+import { MemoryRouter, Route, Routes } from "react-router"
+import Authenticate from "../../Pages/Authenticate/authenticate"
+import Operations from "../../Pages/Operations/operations"
+import Management from "../../Pages/Management/management"
+import NewOrSetOperation from "../../Pages/NewOrSetOperation/neworsetoperation"
+import Statistics from "../../Pages/Statistics/statistics"
+import { setupServer } from "msw/node"
+import { http, HttpResponse } from "msw"
+import jwt from "jsonwebtoken"
+
+const operations: IOperation[] = [
+        {label: "VIREMENT RECU DE: AIRBUS FRANCE SAS\nREF:FR2025:48:456355:34334:34", category: "salary", type: "INCOME", amount: 1750, id: 1},
+        {label: "PAIEMENT CARTE J85475\nREF:FR2025:48:456355:34334:34", category: "courses", type: "EXPENSE", amount: 150.67, id: 2},
+        {label: "VIREMENT RECU DE: AIRBUS FRANCE SAS\nREF:FR2025:48:456355:34334:34", category: "payment", type: "INCOME", amount: 170.98, id: 3},
+        {label: "PRELEVEMENT IMPÔT\nREF:FR2025:48:456355:34334:34", category: "tax", type: "EXPENSE", amount: 15.17, id: 4},
+        {label: "PRELEVEMENT SEPA ABONNEMENT\nREF:FR2025:48:456355:34334:34", category: "subscription", type: "EXPENSE", amount: 130.56, id: 5},
+    ]
+
+const server = setupServer(
+    http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async ({request, params}) => {
+        const { id } = params
+        console.log(id)
+        return HttpResponse.json(
+                {
+                    member: operations
+                },
+                {
+                    status: 200
+                }
+            )
+        }
+    ),
+    http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async () => {
+        return HttpResponse.json(
+                {
+                    id: 1
+                },
+                {
+                    status: 200
+                }
+            )
+        }
+    ),
+)
+
+beforeAll(
+    () => {
+        server.listen()
+    }
+)
+
+afterEach(
+    () => {
+        server.resetHandlers()
+    }
+)
+afterAll(
+    () => {
+        server.close()
+    }
+)
+
+const token = jwt.sign({email: "this@gmail.com"},"THESECRETTOSIGN")
+localStorage.setItem("token", token)
 
 describe("Signin tests", () => {
-    it("should have a category span", async () => {
-        let operation: IOperation = {label: "VIREMENT RECU", category: "salary", type: "income", amount: 1750, date: "29/05/2025"}
+    it("Should have the good number of visible Operation Components", async () => {
         
-        render(<Operation
-            operation={operation}
-        />)
+        await act(async () => render(
+        <MemoryRouter initialEntries={["/operations"]}>
+                <Routes>
+                    <Route path="/" element={<Authenticate />} />
+                    <Route path="/operations" element={<Operations />} />
+                    <Route path="/management" element={<Management />} />
+                    <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
+                    <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
+                    </Route>
+                    <Route path="/statistics" element={<Statistics />} />
+                </Routes>
+            </MemoryRouter>
+        ))
 
-        expect(document.querySelector("span.category")).toHaveTextContent("salary")
+        const allOperations = await waitFor(() => document.querySelectorAll(".operations .all .operation"))
+        const incomeOperations = await waitFor(() => document.querySelectorAll(".operations .incomes .operation"))
+        const expenseOperations = await waitFor(() => document.querySelectorAll(".operations .expenses .operation"))
 
-    })
-    it("should have a label paragraph", async () => {
-        let operation: IOperation = {label: "VIREMENT RECU", category: "salary", type: "income", amount: 1750, date: "29/05/2025"}
-        
-        render(<Operation
-            operation={operation}
-        />)
-
-        expect(document.querySelector("p.label")).toHaveTextContent("VIREMENT RECU")
-
-    })
-    it("should have span with positive amount ", async () => {
-        let operation: IOperation = {label: "VIREMENT RECU", category: "salary", type: "income", amount: 1750, date: "29/05/2025"}
-        
-        render(<Operation
-            operation={operation}
-        />)
-
-        expect(document.querySelector("span.amount")).toHaveTextContent("1750 €")
-
-    })
-    it("should have span with negative amount ", async () => {
-        let operation: IOperation = {label: "Taxing", category: "tax", type: "expense", amount: 50, date: "29/05/2025"}
-        
-        render(<Operation
-            operation={operation}
-        />)
-
-        expect(document.querySelector("span.amount")).toHaveTextContent("- 50 €")
+        console.log("Le nombre d'opérations est", operations.length)
+        expect(allOperations.length).toBe(5)
+        expect(incomeOperations.length).toBe(2)
+        expect(expenseOperations.length).toBe(3)
 
     })
 })
