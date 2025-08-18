@@ -17,9 +17,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.18
-          
+
       - name: Install dependencies
-        run: npm install -c frontend
+        run: npm install -C frontend
 
       - name: Running tests
         run: npm run test
