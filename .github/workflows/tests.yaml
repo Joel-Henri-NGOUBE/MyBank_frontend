@@ -22,4 +22,4 @@ jobs:
         run: npm install -C frontend
 
       - name: Running tests
-        run: npm run test
+        run: npm run test -C frontend
