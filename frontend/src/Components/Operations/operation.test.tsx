@@ -1,5 +1,4 @@
 import { act, render, waitFor } from "@testing-library/react"
-import Operation from "./operation"
 import type { IOperation } from "../../Interfaces/operation"
 import { MemoryRouter, Route, Routes } from "react-router"
 import Authenticate from "../../Pages/Authenticate/authenticate"

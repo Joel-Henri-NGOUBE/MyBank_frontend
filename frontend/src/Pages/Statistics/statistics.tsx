@@ -48,6 +48,7 @@ export default function Statistics(){
                 })
         .then(res => res.json())
         .then((res: any) => {
+            setOperations(res.member)
         })
     }, [id])
 
