@@ -9,14 +9,14 @@ Pour exécuter l'application, nous aurons besoin d'un backend, en l'occurence d'
 
 - node
 
-- Cloner le dépôt depuis votre dossier de travail avec la commande `git clone url`
+- Cloner le dépôt depuis votre dossier de travail avec la commande `git clone https://github.com/Joel-Henri-NGOUBE/MyBank_frontend`
 
 #### Avec Xampp, Mamp ou Lamp
 Vous devez:
 
 - Activer les ports d'Apache et de Mysql qui seront utiles pour le lancement du backend
 
-- Réaliser les étapes de mise en marche comme indiquer dans la documentation de l'API à l'adresse: 
+- Réaliser les étapes de mise en marche comme indiquer dans la documentation de l'API à l'adresse: https://github.com/Joel-Henri-NGOUBE/MyBank_backend
 
 - Vous déplacer vers le dossier `frontend`
 
