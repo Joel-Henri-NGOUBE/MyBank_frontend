@@ -19,6 +19,8 @@ const operations: IOperation[] = [
         {label: "PRELEVEMENT SEPA ABONNEMENT\nREF:FR2025:48:456355:34334:34", category: "subscription", type: "EXPENSE", amount: 130.56, id: 5},
     ]
 
+// The definition of mocked API routes
+
 const server = setupServer(
     http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(
@@ -66,6 +68,7 @@ localStorage.setItem("token", token)
 
 describe("Header tests", () => {
     it("Should redirect to Operations", async () => {
+        // Awaiting the router for permitting the requests to reach the API routes before the application is rendered 
         await act(async () => render(
         <MemoryRouter initialEntries={["/statistics"]}>
                 <Routes>
@@ -92,6 +95,7 @@ describe("Header tests", () => {
 
         const operationsDivContainer = document.querySelector(".operations")
 
+        // As the operations' class only exist on the operations' page, it asserts that the redirection was successful
         expect(operationsDivContainer).toBeInTheDocument()
         expect(operationsDivContainer).toBeVisible()
 

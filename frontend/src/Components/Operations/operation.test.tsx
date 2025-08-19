@@ -18,6 +18,8 @@ const operations: IOperation[] = [
         {label: "PRELEVEMENT SEPA ABONNEMENT\nREF:FR2025:48:456355:34334:34", category: "subscription", type: "EXPENSE", amount: 130.56, id: 5},
     ]
 
+// The definition of mocked API routes
+
 const server = setupServer(
     http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(
@@ -65,7 +67,7 @@ localStorage.setItem("token", token)
 
 describe("Signin tests", () => {
     it("Should have the good number of visible Operation Components", async () => {
-        
+        // Awaiting the router for permitting the requests to reach the API routes before the application is rendered 
         await act(async () => render(
         <MemoryRouter initialEntries={["/operations"]}>
                 <Routes>
@@ -84,8 +86,13 @@ describe("Signin tests", () => {
         const incomeOperations = await waitFor(() => document.querySelectorAll(".operations .incomes .operation"))
         const expenseOperations = await waitFor(() => document.querySelectorAll(".operations .expenses .operation"))
 
+        // As there are 5 operations defined in the top
         expect(allOperations.length).toBe(5)
+        
+        // As there are 2 income operations defined in the top
         expect(incomeOperations.length).toBe(2)
+
+        // As there are 3 expense operations defined in the top
         expect(expenseOperations.length).toBe(3)
 
     })

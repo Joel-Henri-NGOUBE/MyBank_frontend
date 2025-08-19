@@ -9,6 +9,8 @@ import { setupServer } from "msw/node"
 import { http, HttpResponse } from "msw"
 import jwt from "jsonwebtoken"
 
+// The definition of mocked API routes
+
 const server = setupServer(
     http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async ({request}) => {
         const credentials = await request.json()
@@ -74,6 +76,7 @@ localStorage.setItem("token", token)
 
 describe("Signup tests", () => {
     it("Should have a span title", async () => {
+        // Defining the router
         render(
             <MemoryRouter initialEntries={["/"]}>
                 <Routes>

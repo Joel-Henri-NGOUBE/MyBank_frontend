@@ -18,9 +18,21 @@ export default function Saving({pages, setPages}: ManagementPages){
         getResult(saving)
     }, [saving.time, saving.amount, saving.date, saving.period])
 
+    /**
+     * 
+     * @param saving An object with all the parameters entered by the user on the page related with how much money he wants to save
+     * @returns The invest result according to the params
+     */
     function getResult(saving: Saving){
         const amount = parseFloat(saving.amount)
         const time = parseFloat(saving.time)
+        /**
+         * Calculates the difference of days between two dates
+         * @param firstDate The furthest date
+         * @param secondDate The closest date
+         * 
+         * @returns The days between those dates
+         */
         function getDays(firstDate: Date, secondDate: Date){
             const milliseconds =  secondDate.valueOf() - firstDate.valueOf()
             const hours = parseInt(`${Math.floor(milliseconds / (1000 * 60 * 60))}`)
@@ -36,7 +48,11 @@ export default function Saving({pages, setPages}: ManagementPages){
         }
         return saving.result
     }
-
+    /**
+     * Transforms the date to the input date accepted format
+     * @param date Any date
+     * @returns the date in the right format
+     */
     function formateDate(date: Date){
         return date.toLocaleDateString("fr-FR", {year: "numeric", month: "2-digit", day: "2-digit"}).split("/").reverse().join("-")
     }

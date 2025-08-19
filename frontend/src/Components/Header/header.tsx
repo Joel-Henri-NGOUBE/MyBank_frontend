@@ -8,6 +8,11 @@ export default function Header(){
     const path = location.pathname
 
     const navigate: NavigateFunction = useNavigate()
+    /**
+     * 
+     * @param e The event triggered
+     * Sets off the token in the local storage and navigates to the authenticate page
+     */
     function handleLogout(e: any){
         e.preventDefault()
         localStorage.removeItem("token")

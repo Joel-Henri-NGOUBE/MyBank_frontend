@@ -10,6 +10,8 @@ import { setupServer } from "msw/node"
 import { http, HttpResponse } from "msw"
 import jwt from "jsonwebtoken"
 
+// The definition of mocked API routes
+
 const server = setupServer(
     http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(
@@ -57,7 +59,7 @@ localStorage.setItem("token", token)
 
 describe("ManagementComponents tests", () => {
     it("Should have Investing as the active page", async () => {
-
+        // Awaiting the router for permitting the requests to reach the API routes before the application is rendered 
         await act(async () => render(
         <MemoryRouter initialEntries={["/management"]}>
                 <Routes>
@@ -79,6 +81,8 @@ describe("ManagementComponents tests", () => {
         await userEvent.click(managementActions[0])
 
         expect(managementActionsDiv).not.toBeInTheDocument()
+
+        // As the investing and management header are not in the document by default
         
         const investing = document.querySelector(".investing")
         

@@ -11,6 +11,8 @@ export default function Authenticate(){
     
     const token = localStorage.getItem("token")
     
+    // Getting the id to verify is the current user is authenticated
+    
     useEffect(() => {
         token
         &&

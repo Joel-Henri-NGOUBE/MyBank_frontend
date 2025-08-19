@@ -28,6 +28,13 @@ export default function SignIn(){
         setInputValues({...inputValues, input2: (event.target as HTMLInputElement).value})
     }
 
+    /**
+     * 
+     * @param inputValues An object that contains all the input values of the page form
+     * 
+     * Authenticates the user by creating a new account if the email doesn't exist yet.
+     */
+    
     function handleSignIn(inputValues: IInputsWithTwoValues){
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/login_check"].join(""), {
             method: "POST",

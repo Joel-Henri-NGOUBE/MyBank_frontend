@@ -9,6 +9,8 @@ import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
 import jwt from "jsonwebtoken"
 
+// The definition of mocked API routes
+
 const server = setupServer(
     http.get([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/:id/operations"].join(""), async () => {
         return HttpResponse.json(

@@ -30,6 +30,13 @@ export default function SignUp(){
         setInputValues({...inputValues, input3: (event.target as HTMLInputElement).value})
     }
 
+    /**
+     * 
+     * @param inputValues An object that contains all the input values of the page form
+     * 
+     * Authenticates the user by logging him in if the email doesn't exist yet.
+     */
+
     function handleSignUp(inputValues: IInputsWithThreeValues){
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/signup"].join(""), {
             method: "POST",

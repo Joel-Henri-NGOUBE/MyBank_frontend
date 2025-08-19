@@ -11,6 +11,8 @@ import { http, HttpResponse } from "msw";
 import jwt from "jsonwebtoken";
 import { setupServer } from "msw/node";
 
+// The definition of mocked API routes
+
 const server = setupServer(
     http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async () => {
         return HttpResponse.json(
@@ -47,6 +49,7 @@ localStorage.setItem("token", token)
 
 describe("Management page tests", async () => {
     it("should hide default management interface and display tracking interface", async () => {
+        // Awaiting the router for permitting the requests to reach the API routes before the application is rendered 
         await act(async () => render(
             <MemoryRouter initialEntries={["/management"]}>
                 <Routes>
@@ -95,6 +98,8 @@ describe("Management page tests", async () => {
         expect(divActions).toBeVisible()
         
         const investing = document.querySelector(".investing")
+
+        // As the actions and the investing subpage don't appear at the same time ont the page
         
         investing && await userEvent.click(investing)
         
@@ -124,6 +129,8 @@ describe("Management page tests", async () => {
         expect(divActions).toBeVisible()
         
         const saving = document.querySelector(".saving")
+
+        // As the actions and the saving subpage don't appear at the same time ont the page
         
         saving && await userEvent.click(saving)
         

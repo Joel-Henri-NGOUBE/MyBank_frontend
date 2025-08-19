@@ -17,6 +17,8 @@ export default function Statistics(){
 
     const token = localStorage.getItem("token")
 
+    // Getting the id to verify is the current user is authenticated
+
     useEffect(() => {
             token
             ?
@@ -38,6 +40,8 @@ export default function Statistics(){
             : navigate("/")
     }, [])
 
+    // Getting all the operations of the authenticated user
+
     useEffect(() => {
         id &&
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id,"/operations/"].join(""), {
@@ -54,17 +58,25 @@ export default function Statistics(){
 
     const incomes: IOperation[] = operations?.filter(op => op.type === "INCOME") || []
     const incomesTotal: number = incomes.reduce((acc, cur) => cur.amount + acc, 0)
+    
+    // Gets the percentage represented by each income on the base of all incomes
     const incomeData: {label: string, value: number}[] = incomes.reduce((acc: {label: string, value: number}[], cur) => { 
                 acc.push({label: cur.category.toUpperCase(), value: parseFloat(((cur.amount/incomesTotal)*100).toFixed(2))})
                 return acc
             }, [])
+
     const expenses: IOperation[] = operations?.filter(op => op.type === "EXPENSE") || []
     const expensesTotal: number = expenses.reduce((acc, cur) => cur.amount + acc, 0)
+    
+    // Gets the percentage represented by each expense on the base of all incomes
     const expenseData: {label: string, value: number}[] = expenses.reduce((acc: {label: string, value: number}[], cur) => { 
                 acc.push({label: cur.category.toUpperCase(), value: parseFloat(((cur.amount/expensesTotal)*100).toFixed(2))})
                 return acc
             }, [])
 
+    /**
+     * Activates the animations that display the Expense tab
+     */
     function slide(){
         if(!(document.querySelector(".slider")as HTMLElement).classList.contains("slide")){
             (document.querySelector(".slider") as HTMLElement).classList.add("slide");
@@ -77,6 +89,9 @@ export default function Statistics(){
         }
     }
 
+    /**
+     * Activates the animations that display the Income tab
+     */
     function slideBack(){
         if(!(document.querySelector(".slider") as HTMLElement).classList.contains("slide-back")){
             (document.querySelector(".slider") as HTMLElement).classList.add("slide-back");

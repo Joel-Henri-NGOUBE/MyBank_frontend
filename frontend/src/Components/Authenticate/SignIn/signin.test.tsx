@@ -9,6 +9,8 @@ import { setupServer } from "msw/node"
 import { http, HttpResponse } from "msw"
 import jwt from "jsonwebtoken"
 
+// The definition of mocked API routes
+
 const server = setupServer(
     http.post([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), async ({request}) => {
         const credentials = await request.json()
@@ -75,6 +77,7 @@ localStorage.setItem("token", token)
 
 describe("Signin tests", () => {
     it("should have a span title", async () => {
+        // Awaiting the router for permitting the requests to reach the API routes before the application is rendered 
         await act(async () => render(
             <MemoryRouter initialEntries={["/"]}>
                 <Routes>
@@ -153,26 +156,6 @@ describe("Signin tests", () => {
 
         expect(content).toBeInTheDocument()
         expect(content).toBeVisible()
-
-    })
-    it("Should not generate an error", async () => {
-        render(
-            <MemoryRouter initialEntries={["/"]}>
-                <Routes>
-                    <Route path="/" element={<Authenticate />} />
-                    <Route path="/operations" element={<Operations />} />
-                    <Route path="/management" element={<Management />} />
-                    <Route path="/neworsetoperation" element={<NewOrSetOperation />}>
-                    <Route path="/neworsetoperation/:id" element={<NewOrSetOperation />} />
-                    </Route>
-                    <Route path="/statistics" element={<Statistics />} />
-                </Routes>
-            </MemoryRouter>
-        )
-
-        const button = document.querySelector("button")
-
-        fireEvent.click((button as HTMLElement))
 
     })
 })

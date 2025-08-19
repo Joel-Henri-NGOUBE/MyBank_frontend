@@ -16,6 +16,8 @@ export default function NewOrSetOperation(){
 
     const token = localStorage.getItem("token")
 
+    // Getting the id to verify is the current user is authenticated
+
     useEffect(() => {
         token ?
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/id"].join(""), {
@@ -39,6 +41,7 @@ export default function NewOrSetOperation(){
 
     const operationId = "id" in useParams() ? (useParams() as {id: string}).id : null;
 
+    // Getting the operation to set if there is an operation id in the url parameters
     useEffect(() => {
         (id && operationId) &&
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id, "/operations/", operationId].join(""), {
@@ -111,6 +114,11 @@ export default function NewOrSetOperation(){
         setInputValues({...inputValues, input4: (event.target as HTMLSelectElement).value})
     }
 
+    /**
+     * Creates an operation for the user authenticated or modifies an existing operation based on the form inputs values
+     * @param inputValues An object that contains all the input values of the page form
+     * @param navigate The function of react that permits the navigation between pages
+     */
     function createOperation(inputValues: IInputsWithFourValues, navigate: Function){
         !operationId
         ?

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { categories } from "../../Interfaces/categories";
 import { useNavigate, type NavigateFunction } from "react-router";
+import { slideToAll, slideToCategories, slideToExpenses, slideToIncomes } from "./Utils/operationsPage";
 
 export default function Operations(){
 
@@ -19,6 +20,8 @@ export default function Operations(){
     const navigate: NavigateFunction = useNavigate()
 
     const token = localStorage.getItem("token")
+
+    // Getting the id to verify is the current user is authenticated
 
     useEffect(() => {
         token ?
@@ -40,6 +43,7 @@ export default function Operations(){
         : navigate("/")
     }, [])
 
+    // Getting all the operations of the authenticated user
     useEffect(() => {
         id &&
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id,"/operations/"].join(""), {
@@ -55,6 +59,10 @@ export default function Operations(){
         })
     }, [id])
 
+    /**
+     * Deletes an operation
+     * @param operationId The id of an operation
+     */
     function handleDelete(operationId: number){
         fetch([`${import.meta.env.VITE_APP_BACKEND_API_URL}`, "/api/users/", id, "/operations/", operationId].join(""), {
             method: "DELETE",
@@ -64,112 +72,6 @@ export default function Operations(){
         })
         setOperations(operations.filter(op => op.id !== operationId))
         setOperationsDisplayed(operations.filter(op => op.id !== operationId))
-    }
-
-    const allSlides: string[] = ["slideFromIncomesToAll","slideFromExpensesToAll","slideFromCategoriesToAll","slideFromAllToIncomes","slideFromExpensesToIncomes","slideFromCategoriesToIncomes","slideFromIncomesToExpenses","slideFromAllToExpenses","slideFromCategoriesToExpenses","slideFromIncomesToCategories","slideFromExpensesToCategories","slideFromAllToCategories"]
-
-    function slideToAll(){
-        
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("incomes")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromIncomesToAll");
-            
-        }
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("expenses")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromExpensesToAll");
-            
-        }
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("categories")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromCategoriesToAll");
-
-        }
-        (document.querySelector(".clicked") as HTMLElement).classList.remove("clicked");
-        (document.querySelector("span.all") as HTMLElement).classList.add("clicked");
-        
-    }
-
-    function slideToIncomes(){
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("all")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromAllToIncomes");
- 
-        }
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("expenses")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromExpensesToIncomes");
-
-        }
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("categories")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromCategoriesToIncomes");
-  
-        }
-        (document.querySelector(".clicked") as HTMLElement).classList.remove("clicked");
-        (document.querySelector("span.incomes") as HTMLElement).classList.add("clicked");
-    }
-
-    function slideToExpenses(){
-
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("incomes")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromIncomesToExpenses");
-        }
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("all")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromAllToExpenses");
-        }
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("categories")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromCategoriesToExpenses");
-        }
-        (document.querySelector(".clicked") as HTMLElement).classList.remove("clicked");
-        (document.querySelector("span.expenses") as HTMLElement).classList.add("clicked");
-
-    }
-
-    function slideToCategories(){
-
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("incomes")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromIncomesToCategories");
-        }
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("expenses")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromExpensesToCategories");
-        }
-        if((document.querySelector(".clicked") as HTMLElement).classList.contains("all")){
-            allSlides.forEach(aS => {
-                (document.querySelector(".operations-wrapper") as HTMLElement).classList.remove(aS);
-            });
-            (document.querySelector(".operations-wrapper") as HTMLElement).classList.add("slideFromAllToCategories");
-        }
-        (document.querySelector(".clicked") as HTMLElement).classList.remove("clicked");
-        (document.querySelector("span.categories") as HTMLElement).classList.add("clicked");
-
     }
 
     return <div className="operations">

@@ -21,11 +21,23 @@ export default function Investing({pages, setPages}: ManagementPages){
         getResult(investing)
     }, [investing.time, investing.amount, investing.date, investing.period, investing.capital, investing.interest])
 
+    /**
+     * 
+     * @param investing An object with all the parameters entered by the user on the page related with the invest he wants to generate
+     * @returns The invest result according to the params
+     */
     function getResult(investing: Investing){
         let amount = parseFloat(investing.amount)
         let interest = parseFloat(investing.interest)
         let capital = parseFloat(investing.capital)
         let time = parseFloat(investing.time)
+        /**
+         * Calculates the difference of days between two dates
+         * @param firstDate The furthest date
+         * @param secondDate The closest date
+         * 
+         * @returns The days between those dates
+         */
         function getDays(firstDate: Date, secondDate: Date){
             const milliseconds =  secondDate.valueOf() - firstDate.valueOf()
             const hours = parseInt(`${Math.floor(milliseconds / (1000 * 60 * 60))}`)
@@ -45,7 +57,11 @@ export default function Investing({pages, setPages}: ManagementPages){
         }
         return investing.result
     }
-
+    /**
+     * Transforms the date to the input date accepted format
+     * @param date Any date
+     * @returns the date in the right format
+     */
     function formateDate(date: Date){
         return date.toLocaleDateString("fr-FR", {year: "numeric", month: "2-digit", day: "2-digit"}).split("/").reverse().join("-")
     }
