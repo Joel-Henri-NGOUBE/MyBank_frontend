@@ -56,23 +56,23 @@ export default function Investing({pages, setPages}: ManagementPages){
             setPages={setPages}
         />
         <div className="body">
-            <p>Combien souhaitez-vous mettre de côté pour épargne ?</p>
+            <p>How much money do you want to save ?</p>
             <input type="number" placeholder="1234,67" value={investing.amount} onChange={(e) => setInvesting((i) => ({...i, amount: e.target.value}))}/>
-            <p>A quelle fréquence souhaitez vous réaliser cette épargne  ?</p>
+            <p>How often do you want to make that save  ?</p>
             <div className="period">
                 <input type="number" placeholder="1234" value={investing.time} onChange={(e) => setInvesting((i) => ({...i, time: e.target.value}))}/>
                 <select name="" id="" value={investing.period} onChange={(e) => setInvesting((i) => ({...i,  period: e.target.value}))}>
-                    <option value="days">jours</option>
-                    <option value="month">mois</option>
+                    <option value="days">day</option>
+                    <option value="month">month</option>
                 </select>
             </div>
-            <p>Quel est votre capital ?</p>
+            <p>What your capital ?</p>
             <input type="number" placeholder="1234567" value={investing.capital} onChange={(e) => setInvesting((i) => ({...i,  capital: e.target.value}))}/>
-            <p>Quel pourcentage d’intérêt obtiendrez-vous sur votre capital (à chaque période)? </p>
+            <p>Which percentage of interest will you gain on your capital (at each period)? </p>
             <input type="number" placeholder="12,07" value={investing.interest} onChange={(e) => setInvesting((i) => ({...i,  interest: e.target.value}))}/>
-            <p>Jusqu'à quelle date ?</p>
+            <p>Until when ?</p>
             <input type="date" value={formateDate((new Date(investing.date)))} onChange={(e) => setInvesting((i) => ({...i, date: formateDate(new Date(e.target.value))}))}/>
-            <p>Le résultat de votre épargne sera de: </p>
+            <p>The result of your savings will be of : </p>
             <span className="result">{investing.result.toFixed(2)} €</span>
         </div>
     </div>

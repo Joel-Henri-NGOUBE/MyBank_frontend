@@ -47,19 +47,19 @@ export default function Saving({pages, setPages}: ManagementPages){
                     setPages={setPages}
                 />
                 <div className="body">
-                    <p>Combien souhaitez-vous mettre de côté pour épargne ?</p>
+                    <p>How much money do you want to save ?</p>
                     <input type="number" placeholder="1234.67" value={saving.amount} onChange={(e) => setSaving({...saving, amount: e.target.value})}/>
-                    <p>A quelle fréquence souhaitez vous réaliser cette épargne  ?</p>
+                    <p>How often do you want to make that save  ?</p>
                     <div className="period">
                         <input type="number" placeholder="1234" value={saving.time} onChange={(e) => setSaving({...saving, time: e.target.value})}/>
                         <select name="" id="" value={saving.period} onChange={(e) => setSaving({...saving,  period: e.target.value})}>
-                            <option value="days">jours</option>
-                            <option value="month">mois</option>
+                            <option value="days">day</option>
+                            <option value="month">month</option>
                         </select>
                     </div>
-                    <p>Jusqu'à quelle date ?</p>
+                    <p>Until when ?</p>
                     <input type="date" value={formateDate((new Date(saving.date)))} onChange={(e) => setSaving({...saving, date: formateDate(new Date(e.target.value))})}/>
-                    <p>Le résultat de votre épargne sera de: </p>
+                    <p>The result of your savings will be of :</p>
                     <span className="result">{saving.result.toFixed(2)} €</span>
                 </div>
             </div>
