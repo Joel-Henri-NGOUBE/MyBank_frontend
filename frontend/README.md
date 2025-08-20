@@ -21,6 +21,10 @@ Vous devez:
 
 - Vous devez exécuter la commande `npm run dev`
 
+##### Tests des composants
+
+Pour réaliser les tests unitaires et d'intégration des composants, vous pouvez effectuer la commande `npm run test`
+
 #### Avec Docker
 
 Vous devez:
