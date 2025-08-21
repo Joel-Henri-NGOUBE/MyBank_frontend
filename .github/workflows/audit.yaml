@@ -34,11 +34,11 @@ jobs:
         run: npm install -C frontend
 
       - name: Security Audit
-        run: npm audit -C frontend --audit-level=critical --audit-level=high --dry-run > /tmp/security-audit-frontend.json
+        run: npm audit -C frontend --audit-level=critical --audit-level=high --dry-run > /tmp/security-audit-frontend.txt
       
       - name: Upload security audit report
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: security-audit
-          path: /tmp/security-audit-frontend.json
+          path: /tmp/security-audit-frontend.txt
