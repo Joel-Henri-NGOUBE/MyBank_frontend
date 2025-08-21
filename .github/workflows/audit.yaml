@@ -33,11 +33,8 @@ jobs:
       - name: Install dependencies
         run: npm install -C frontend
 
-      - name: Install dependencies
-        run: ls -la frontend
-
       - name: Security Audit
-        run: npm audit --audit-level=critical --audit-level=high --dry-run > /tmp/security-audit-frontend.json
+        run: npm audit -C frontend --audit-level=critical --audit-level=high --dry-run > /tmp/security-audit-frontend.json
       
       - name: Upload security audit report
         uses: actions/upload-artifact@v4
