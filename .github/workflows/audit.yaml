@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: npm install -C frontend
 
-        - name: Install dependencies
+      - name: Install dependencies
         run: ls -la frontend
 
       - name: Security Audit
