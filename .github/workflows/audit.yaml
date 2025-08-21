@@ -39,6 +39,7 @@ jobs:
       - name: Security Audit
         run: npm audit -C frontend --audit-level=critical --audit-level=high --dry-run > /tmp/security-audit-frontend.txt
       
+      # Retrieving the audit result
       - name: Upload security audit report
         uses: actions/upload-artifact@v4
         if: always()
