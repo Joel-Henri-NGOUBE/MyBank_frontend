@@ -1,0 +1,42 @@
+name: API Platform Service Audit
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  audit:
+    name: Run audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.18
+        
+      - name: Set Up Cache
+        run: echo "NODE_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
+
+      - name: Caching Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.NODE_CACHE_DIR }}
+          key: react-vite-{{ hashFiles('**/package.json') }}
+          restore-keys: |
+            react-vite-latest-
+
+      - name: Install dependencies
+        run: npm install -C frontend
+
+      - name: Security Audit
+        run: npm audit --audit-level=critical --audit-level=high --dry-run > /tmp/security-audit-frontend.json
+      
+      - name: Upload security audit report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-audit
+          path: /tmp/security-audit.json
