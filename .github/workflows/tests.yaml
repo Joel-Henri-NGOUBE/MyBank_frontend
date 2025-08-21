@@ -1,4 +1,4 @@
-name: React Vite Frontend
+name: React Vite Frontend Tests
 on:
   push:
     branches: [ "main" ]
