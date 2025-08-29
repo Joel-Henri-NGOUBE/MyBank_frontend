@@ -6,6 +6,7 @@ import "./statistics.css"
 import { useNavigate, type NavigateFunction } from "react-router";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { groupify, slide, slideBack } from "./Utils/functions"
 
 export default function Statistics(){
 
@@ -57,53 +58,24 @@ export default function Statistics(){
     }, [id])
 
     const incomes: IOperation[] = operations?.filter(op => op.type === "INCOME") || []
-    const incomesTotal: number = incomes.reduce((acc, cur) => cur.amount + acc, 0)
+    const incomesGroups = groupify(incomes)
+    const incomesTotal: number = incomesGroups.reduce((acc, cur) => cur.amount + acc, 0)
     
     // Gets the percentage represented by each income on the base of all incomes
-    const incomeData: {label: string, value: number}[] = incomes.reduce((acc: {label: string, value: number}[], cur) => { 
+    const incomeData: {label: string, value: number}[] = incomesGroups.reduce((acc: {label: string, value: number}[], cur) => { 
                 acc.push({label: cur.category.toUpperCase(), value: parseFloat(((cur.amount/incomesTotal)*100).toFixed(2))})
                 return acc
             }, [])
 
     const expenses: IOperation[] = operations?.filter(op => op.type === "EXPENSE") || []
-    const expensesTotal: number = expenses.reduce((acc, cur) => cur.amount + acc, 0)
+    const expensesGroup = groupify(expenses)
+    const expensesTotal: number = expensesGroup.reduce((acc, cur) => cur.amount + acc, 0)
     
-    // Gets the percentage represented by each expense on the base of all incomes
-    const expenseData: {label: string, value: number}[] = expenses.reduce((acc: {label: string, value: number}[], cur) => { 
+    // Gets the percentage represented by each expense on the base of all expenses
+    const expenseData: {label: string, value: number}[] = expensesGroup.reduce((acc: {label: string, value: number}[], cur) => { 
                 acc.push({label: cur.category.toUpperCase(), value: parseFloat(((cur.amount/expensesTotal)*100).toFixed(2))})
                 return acc
             }, [])
-
-    /**
-     * Activates the animations that display the Expense tab
-     */
-    function slide(){
-        if(!(document.querySelector(".slider")as HTMLElement).classList.contains("slide")){
-            (document.querySelector(".slider") as HTMLElement).classList.add("slide");
-
-            (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.remove("clicked");
-            (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.add("clicked")
-            if((document.querySelector(".slider") as HTMLElement).classList.contains("slide-back")){
-                (document.querySelector(".slider") as HTMLElement).classList.remove("slide-back");
-            }
-        }
-    }
-
-    /**
-     * Activates the animations that display the Income tab
-     */
-    function slideBack(){
-        if(!(document.querySelector(".slider") as HTMLElement).classList.contains("slide-back")){
-            (document.querySelector(".slider") as HTMLElement).classList.add("slide-back");
-
-            (document.querySelector(".tablist .tab:nth-of-type(1)") as HTMLElement).classList.add("clicked");
-            (document.querySelector(".tablist .tab:nth-of-type(2)") as HTMLElement).classList.remove("clicked")
-
-            if((document.querySelector(".slider") as HTMLElement).classList.contains("slide")){
-                (document.querySelector(".slider") as HTMLElement).classList.remove("slide");
-            }
-        }
-    }
 
     return <div className="statistics">
         <Header />
@@ -134,7 +106,7 @@ export default function Statistics(){
                             width={200}
                         />
                         <div className="categories">
-                            {incomes.map((i, index) => <div className="category" key={index}><span className="category">{i.category}</span><span className="percentage">{((i.amount/incomesTotal)*100).toFixed(2)} %</span></div>)}
+                            {incomesGroups.map((i, index) => <div className="category" key={index}><span className="category">{i.category}</span><span className="percentage">{((i.amount/incomesTotal)*100).toFixed(2)} %</span></div>)}
 
                         </div>
                     </div>
@@ -157,7 +129,7 @@ export default function Statistics(){
                             width={200}
                         />
                         <div className="categories">
-                            {expenses.map((i, index) => <div className="category" key={index}><span className="category">{i.category}</span><span className="percentage">{((i.amount/expensesTotal)*100).toFixed(2)} %</span></div>)}
+                            {expensesGroup.map((i, index) => <div className="category" key={index}><span className="category">{i.category}</span><span className="percentage">{((i.amount/expensesTotal)*100).toFixed(2)} %</span></div>)}
                         </div>
 
                     </div>
